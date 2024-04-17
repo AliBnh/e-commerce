@@ -1,10 +1,6 @@
 <?php
 
-
-    session_start();
-    if(!isset($_SESSION['user'])){
-        header("Location: ../login.php");
-    }
+require_once '../templates/header.php';
     include("../../includes/db_connect.php");
 
     if(isset($_POST['edit'])){
