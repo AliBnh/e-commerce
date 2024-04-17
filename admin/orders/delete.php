@@ -1,4 +1,10 @@
 <?php
+
+    session_start();
+    if(!isset($_SESSION['user'])){
+        header("Location: ../login.php");
+    }
+
 if(isset($_GET['id'])){
     include("../../includes/db_connect.php");
     $id = mysqli_real_escape_string($conn, $_GET['id']);

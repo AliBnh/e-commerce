@@ -1,6 +1,12 @@
 <?php
+    session_start();
+    if(!isset($_SESSION['user'])){
+        header("Location: ../login.php");
+    }
+
     include("../../includes/db_connect.php");
 
+    
     if(isset($_POST['create'])){
         $name = mysqli_real_escape_string($conn, $_POST['name']);
         $categoryDescription = mysqli_real_escape_string($conn, $_POST['categoryDescription']);
