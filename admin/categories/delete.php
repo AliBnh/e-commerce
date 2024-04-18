@@ -1,7 +1,5 @@
 <?php
 require_once '../templates/header.php';
-
-
 if(isset($_GET['id'])){
     include("../../includes/db_connect.php");
     $id = mysqli_real_escape_string($conn, $_GET['id']);

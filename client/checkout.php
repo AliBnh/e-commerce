@@ -48,7 +48,6 @@ if(!isset($_SESSION['user'])){
         </div>
         <hr/>
         <?php
-        //print the cart items and total from cart stored in cookies
         $cart = json_decode($_COOKIE['cart'],true);
         $cartLength = count($cart);
         $total = 0;
@@ -106,6 +105,6 @@ if(isset($_POST['checkout'])){
 
     }
     setcookie('cart', '', time() - 3600);
-    // header("Location: ./index.php");
+    header("Location: ./index.php");
 }
 ?>

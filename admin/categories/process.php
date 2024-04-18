@@ -2,12 +2,9 @@
 require_once '../templates/header.php';
 
     include("../../includes/db_connect.php");
-
-    
     if(isset($_POST['create'])){
         $name = mysqli_real_escape_string($conn, $_POST['name']);
         $categoryDescription = mysqli_real_escape_string($conn, $_POST['categoryDescription']);
-        
         $checkExistence = "SELECT * FROM categories WHERE LOWER(name) = LOWER('$name')";
         $result = mysqli_query($conn, $checkExistence);
         $numRows = mysqli_num_rows($result);
@@ -15,7 +12,6 @@ require_once '../templates/header.php';
             echo "Category exists";
             exit;
         }else{
-
         if(strlen($categoryDescription)>0)
             $sql = "INSERT INTO categories (name, description) VALUES ('$name', '$description')";
         else
@@ -29,8 +25,6 @@ require_once '../templates/header.php';
         }
     }
     }
-
-
     if(isset($_POST['edit'])){
         $id = mysqli_real_escape_string($conn, $_POST['id']);
         $name = mysqli_real_escape_string($conn, $_POST['name']);

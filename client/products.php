@@ -49,7 +49,7 @@ require_once "header.php";
      echo "<div id='productsByCategory'>";
             if(isset($_GET['id'])){
                 $id = mysqli_real_escape_string($conn, $_GET['id']);
-                $sql = "SELECT * FROM products WHERE category_id = $id";
+                $sql = "SELECT * FROM products WHERE category_id = $id AND archived=0";
                 $result = mysqli_query($conn, $sql);
                 if(mysqli_num_rows($result) > 0){
                     while($row = mysqli_fetch_assoc($result)){
@@ -94,12 +94,12 @@ require_once "header.php";
                 if(isset($_GET['sort'])){
                     $sort = mysqli_real_escape_string($conn, $_GET['sort']);
                     if($sort == 'asc'){
-                        $sql = "SELECT * FROM products WHERE price >= $min AND price <= $max AND category_id = $id ORDER BY price ASC";
+                        $sql = "SELECT * FROM products WHERE price >= $min AND price <= $max AND archived=0 AND category_id = $id ORDER BY price ASC";
                     }else{
-                        $sql = "SELECT * FROM products WHERE price >= $min AND price <= $max AND category_id = $id ORDER BY price DESC";
+                        $sql = "SELECT * FROM products WHERE price >= $min AND price <= $max  AND archived=0 AND category_id = $id ORDER BY price DESC";
                     }
                 }else{
-                    $sql = "SELECT * FROM products WHERE price >= $min AND price <= $max AND category_id = $id";
+                    $sql = "SELECT * FROM products WHERE price >= $min  AND archived=0 AND price <= $max AND category_id = $id";
                 }
                 $result = mysqli_query($conn, $sql);
                 $result = mysqli_query($conn, $sql);
@@ -129,7 +129,7 @@ require_once "header.php";
             if(isset($_GET['name'])){
                 echo "<script>document.getElementById('productsByCategory').style.display = 'none';</script>";
                 $name = mysqli_real_escape_string($conn, $_GET['name']);
-                $sql = "SELECT * FROM products WHERE name LIKE '%$name%'";
+                $sql = "SELECT * FROM products WHERE name LIKE '%$name%' AND archived=0";
                 $result = mysqli_query($conn, $sql);
                 if(mysqli_num_rows($result) > 0){
                     while($row = mysqli_fetch_assoc($result)){

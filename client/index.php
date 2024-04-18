@@ -14,7 +14,7 @@ require_once "header.php";
         <h2>Categories</h2>
         <div class="row">
             <?php
-                $sql = "SELECT * FROM categories";
+                $sql = "SELECT * FROM categories WHERE archived=0";
                 $result = mysqli_query($conn,$sql);
                 while($category = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                     echo "<div class='col-md-3'>";

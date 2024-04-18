@@ -4,6 +4,7 @@
         echo "<h2>Welcome ".$_SESSION['username']."</h2>";
         echo "<a href='./auth/logout.php' class='btn btn-warning'>Logout</a>";
         echo "<a href='./profile.php' class='btn btn-info'>Profile</a>";
+        echo "<a href='./orders.php' class='btn btn-success'>Orders</a>";
     }else{ 
         echo "<h2>Welcome Guest</h2>";
         echo "<a href='./auth/login.php' class='btn btn-primary'>Login</a>";
