@@ -1,7 +1,8 @@
-Collect assets (product 6 images (6products) for top 3 categories)
 Find a perfect modern UI kit & Collect Forms/Tables/Sidebar/Buttons/Login page
-Then start Coding
-Deadline for the admin side  : Tonight Post Ishae
+COLORS: White and it's shades (Grey ish) + Buttons & Active links (blue variant)
+Priority Tables Design (icons for actions)
+Sidebar (active links & color)
+Forms create, edit (categories,products,customers)
 
 Websites to find product images :
 	Unsplash
