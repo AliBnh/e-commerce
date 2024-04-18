@@ -17,7 +17,7 @@ require_once '../templates/header.php';
             echo "User with this email $email exists";
             exit;
         }else{
-        $sql = "UPDATE users SET username='$name', email='$email',address='$address',phone_number='$phone', WHERE id=$id";
+        $sql = "UPDATE users SET username='$name', email='$email', address='$address',phone_number='$phone' WHERE id=$id";
         if(mysqli_query($conn, $sql)){
             session_start();
             $_SESSION['update'] = "The User has been updated successfully!";
