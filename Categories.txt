@@ -1,0 +1,58 @@
+
+
+
+Doughnuts:
+	Glazed Doughnuts
+	Chocolate Frosted Doughnuts
+	Jelly-Filled Doughnuts
+	Boston Cream Doughnuts
+	Maple Bacon Doughnuts
+	Old-Fashioned Sour Cream Doughnuts
+
+Tarts:
+	Fruit Tart (with seasonal fruits like berries, kiwi, and mango)
+	Lemon Tart
+	Chocolate Ganache Tart
+	Raspberry Almond Tart
+	Mixed Berry Tart
+	Caramelized Onion and Gruyere Tart
+
+Cookies:
+	Chocolate Chip Cookies
+	Snickerdoodle Cookies
+	Oatmeal Raisin Cookies
+	Peanut Butter Cookies
+	Double Chocolate Chunk Cookies
+	White Chocolate Macadamia Nut Cookies
+--------------------------------------------------------------------------
+Cupcakes:
+	Chocolate Cupcakes with Vanilla Buttercream Frosting
+	Red Velvet Cupcakes with Cream Cheese Frosting
+	Vanilla Cupcakes with Chocolate Buttercream Frosting
+	Lemon Cupcakes with Lemon Buttercream Frosting
+	Carrot Cake Cupcakes with Cream Cheese Frosting
+	Cookies and Cream Cupcakes
+
+Cakes:
+	Chocolate Fudge Cake
+	Vanilla Sponge Cake
+	Red Velvet Cake
+	Carrot Cake
+	Lemon Drizzle Cake
+	Marble Cake
+
+Bread:
+	Sourdough Bread
+	Whole Wheat Bread
+	Multigrain Bread
+	Baguette
+	Ciabatta
+	Focaccia
+
+Croissants:
+	Plain Croissants
+	Chocolate Croissants (Pain au Chocolat)
+	Almond Croissants
+	Ham and Cheese Croissants
+	Raspberry Croissants
+	Cinnamon Croissants
