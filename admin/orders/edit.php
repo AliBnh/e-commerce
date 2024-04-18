@@ -37,7 +37,6 @@ require_once '../templates/header.php';
                 <option value="cancelled" <?php if($row['status'] == 'cancelled') echo "selected";?>>Cancelled</option>
             </select>
             <input type="hidden" name="created_at" value="<?php echo $row["created_at"];?>">
-            <input type="hidden" name="address" value="<?php echo $row["address"];?>">
             <input type="hidden" name="payment_method" value="<?php echo $row["payment_method"];?>">
             <input type="hidden" name="total" value="<?php echo $row["total"];?>">
             <input type="hidden" name="id" value="<?php echo $_GET['id'];?>">

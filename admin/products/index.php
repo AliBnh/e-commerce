@@ -41,7 +41,8 @@ require_once '../templates/header.php';
                     <th>#</th>
                     <th>Image</th>
                     <th>Name</th>
-                    <th>Price</th>
+                    <th>Selling Price</th>
+                    <th>Costing Price</th>
                     <th>Category</th>
                     <th>Actions</th>
                 </tr>
@@ -58,6 +59,7 @@ require_once '../templates/header.php';
                             echo "<td><img src='../../uploads/".$row['image']."' width='100' height='100'></td>";
                             echo "<td>".$row['name']."</td>";
                             echo "<td>".$row['price']."</td>";
+                            echo "<td>".$row['cost_price']."</td>";
                             $categoryId = $row['category_id'];
                             $fetchCategoryNameSql = "SELECT name FROM categories WHERE id=$categoryId";
                             $categoryNameRows = mysqli_query($conn, $fetchCategoryNameSql);

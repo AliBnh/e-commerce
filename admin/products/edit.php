@@ -36,7 +36,10 @@ require_once '../templates/header.php';
                 <input type="text" name="description" value="<?php echo $row["description"];?>" class="form-control" placeholder="Product Description ">
             </div>
             <div class="form-element my-4">
-                <input type="number" name="price" value="<?php echo $row["price"];?>" class="form-control" placeholder="Product Price " required>
+                <input type="number" name="price" value="<?php echo $row["price"];?>" class="form-control" placeholder="Selling Price " required>
+            </div>
+            <div class="form-element my-4">
+                <input type="number" name="cost_price" value="<?php echo $row["cost_price"];?>" class="form-control" placeholder="Costing Price " required>
             </div>
             <select name="categoryId"  class="form-element my-4" required>
                 <?php

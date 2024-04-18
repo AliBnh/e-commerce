@@ -24,10 +24,13 @@ require_once '../templates/header.php';
                 <input type="text" name="name" class="form-control" placeholder="Product Name " required>
             </div>
             <div class="form-element my-4">
-                <input type="text" name="description" class="form-control" placeholder="Product Description ">
+                <input type="text" name="description" class="form-control" placeholder="Description ">
             </div>
             <div class="form-element my-4">
-                <input type="number" name="price" class="form-control" placeholder="Product Price " required>
+                <input type="number" name="price" class="form-control" placeholder="Selling Price " required>
+            </div>
+            <div class="form-element my-4">
+                <input type="number" name="cost_price" class="form-control" placeholder="Costing Price " required>
             </div>
             <select name="categoryId" class="form-element my-4" required>
                 <?php

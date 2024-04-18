@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2024 at 10:30 AM
+-- Generation Time: Apr 18, 2024 at 03:28 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -39,9 +39,10 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `description`, `archived`) VALUES
-(17, 'Smartphones', '', 0),
+(17, 'Smartphones', 'jadzifnaozifn', 0),
 (18, 'Cameras', '', 0),
-(19, 'Laptops', '', 0);
+(19, 'Laptops', '', 0),
+(27, 'Quyn Webster', '', 1);
 
 -- --------------------------------------------------------
 
@@ -52,7 +53,6 @@ INSERT INTO `categories` (`id`, `name`, `description`, `archived`) VALUES
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `address` text DEFAULT NULL,
   `payment_method` enum('credit_card','cash_on_delivery') NOT NULL,
   `status` enum('pending','processing','shipped','completed','cancelled') DEFAULT 'pending',
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
@@ -63,9 +63,12 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `user_id`, `address`, `payment_method`, `status`, `created_at`, `total`) VALUES
-(10, 5, 'dazaedEZD', 'cash_on_delivery', 'pending', '2024-04-18 10:03:56', 4700.00),
-(11, 5, 'dazaedEZD', 'cash_on_delivery', 'pending', '2024-04-18 10:11:59', 2000.00);
+INSERT INTO `orders` (`id`, `user_id`, `payment_method`, `status`, `created_at`, `total`) VALUES
+(10, 5, 'cash_on_delivery', 'pending', '2024-04-18 10:03:56', 4700.00),
+(11, 5, 'cash_on_delivery', 'pending', '2024-04-18 10:11:59', 2000.00),
+(12, 5, 'cash_on_delivery', 'completed', '2024-04-18 10:46:15', 1400.00),
+(13, 5, 'cash_on_delivery', 'pending', '2024-04-18 10:52:50', 522.00),
+(14, 5, 'cash_on_delivery', 'completed', '2024-04-18 14:33:42', 4700.00);
 
 -- --------------------------------------------------------
 
@@ -89,7 +92,11 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `total`) 
 (11, 10, 18, 3, 2700.00),
 (12, 10, 19, 2, 2000.00),
 (13, 11, 20, 2, 1300.00),
-(14, 11, 21, 1, 700.00);
+(14, 11, 21, 1, 700.00),
+(15, 12, 21, 2, 1400.00),
+(16, 13, 30, 1, 522.00),
+(17, 14, 18, 3, 2700.00),
+(18, 14, 19, 2, 2000.00);
 
 -- --------------------------------------------------------
 
@@ -102,6 +109,7 @@ CREATE TABLE `products` (
   `name` varchar(255) NOT NULL,
   `description` text DEFAULT NULL,
   `price` decimal(10,2) NOT NULL,
+  `cost_price` int(11) DEFAULT NULL,
   `stock` int(11) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `category_id` int(11) NOT NULL,
@@ -112,13 +120,14 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `stock`, `image`, `category_id`, `archived`) VALUES
-(18, 'Iphone X', 'This is a ', 900.00, NULL, 'iphoneX.jpg', 17, 0),
-(19, 'Iphone 11', 'This is a ', 1000.00, NULL, 'iphone11.jpg', 17, 0),
-(20, 'Nikon', 'This is a ', 650.00, NULL, 'Nikon.jpg', 18, 0),
-(21, 'Canon', 'This is a ', 700.00, NULL, 'Canon.jpg', 18, 0),
-(22, 'Mac Air M1', 'This is a ', 1200.00, NULL, 'macAirM1.jpg', 19, 0),
-(23, 'Mac Pro M3', 'Molestiae velit repr', 2100.00, NULL, 'MacProM3.jpg', 19, 0);
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `cost_price`, `stock`, `image`, `category_id`, `archived`) VALUES
+(18, 'Iphone X', 'This is a ', 900.00, 700, NULL, 'iphoneX.jpg', 17, 0),
+(19, 'Iphone 11', 'This is a ', 1000.00, 800, NULL, 'iphone11.jpg', 17, 0),
+(20, 'Nikon', 'This is a ', 650.00, 600, NULL, 'Nikon.jpg', 18, 0),
+(21, 'Canon', 'This is a ', 700.00, 650, NULL, 'Canon.jpg', 18, 0),
+(22, 'Mac Air M1', 'This is a ', 1200.00, 1003, NULL, 'macAirM1.jpg', 19, 0),
+(23, 'Mac Pro M3', 'Molestiae velit repr', 2100.00, 2000, NULL, 'MacProM3.jpg', 19, 0),
+(30, 'Judith Wilson', 'Soluta iste et venia', 522.00, 500, NULL, 'download.jpg', 27, 1);
 
 -- --------------------------------------------------------
 
@@ -145,8 +154,8 @@ INSERT INTO `users` (`id`, `username`, `email`, `address`, `phone_number`, `pass
 (1, 'ali', 'ali@mail.com', '', NULL, 'ali', 1, 0),
 (2, 'alex', 'alex@mail.com', 'Res alex 3 route tan, imm 8', NULL, 'alex', 0, 0),
 (3, 'said', 'said@mail.com', 'Res Said 1 route kenitra', NULL, 'said', 0, 0),
-(5, 'test', 'test@mail.com', 'dazaedEZD', '987Y322', '$2y$10$DmhVKqSLOkJtPyBIBrLkcehFk4J3bVzjVrcFzwHDnI09nP5uGBl5m', 0, 0),
-(6, 't', 't@mail.com', NULL, NULL, '$2y$10$oFvsfSvFAGfvjBvIlv2vLeiX0nQrNzYGPe1yffvjB4/loJQXs0UkK', 0, 0);
+(5, 'test', 'test@mail.com', 'Res halima, imm 2, app 4', '066320871', '$2y$10$DmhVKqSLOkJtPyBIBrLkcehFk4J3bVzjVrcFzwHDnI09nP5uGBl5m', 0, 0),
+(6, 't', 't@mail.com', 'freaz', '32', '$2y$10$oFvsfSvFAGfvjBvIlv2vLeiX0nQrNzYGPe1yffvjB4/loJQXs0UkK', 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -195,25 +204,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `users`

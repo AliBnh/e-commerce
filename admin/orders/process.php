@@ -8,11 +8,10 @@ require_once '../templates/header.php';
         $id = mysqli_real_escape_string($conn, $_POST['id']);
         $status = mysqli_real_escape_string($conn, $_POST['status']);
         $created_at = mysqli_real_escape_string($conn, $_POST['created_at']);
-        $address = mysqli_real_escape_string($conn, $_POST['address']);
         $payment_method = mysqli_real_escape_string($conn, $_POST['payment_method']);
         $total = mysqli_real_escape_string($conn, $_POST['total']);
 
-        $sql = "UPDATE orders SET status = '$status', created_at = '$created_at', address = '$address', payment_method = '$payment_method', total = '$total' WHERE id = $id";
+        $sql = "UPDATE orders SET status = '$status', created_at = '$created_at', payment_method = '$payment_method', total = '$total' WHERE id = $id";
 
         if(mysqli_query($conn, $sql)){
             session_start();

@@ -8,6 +8,7 @@ require_once '../templates/header.php';
         $name = mysqli_real_escape_string($conn, $_POST['name']);
         $description = mysqli_real_escape_string($conn, $_POST['description']);
         $price = $_POST['price'];
+        $cost_price = $_POST['cost_price'];
         $categoryId =  $_POST['categoryId'];
 
         $fileName = $_FILES['image']['name'];
@@ -29,9 +30,9 @@ require_once '../templates/header.php';
             if(move_uploaded_file($fileTmpName, $targetFilePath)){
                 
             if(strlen($description)>0)
-                $sql = "INSERT INTO products (name, description,price,image,category_id) VALUES ('$name', '$description','$price','$fileName','$categoryId')";
+                $sql = "INSERT INTO products (name, description,price,cost_price,image,category_id) VALUES ('$name', '$description','$price','$cost_price','$fileName','$categoryId')";
             else
-            $sql = "INSERT INTO products (name,price,image,category_id) VALUES ('$name','$price','$fileName','$categoryId')";
+            $sql = "INSERT INTO products (name,price,cost_price,image,category_id) VALUES ('$name','$price','$cost_price','$fileName','$categoryId')";
             if(mysqli_query($conn, $sql)){
                 session_start();
                 $_SESSION['create'] = "The Product has been added successfully!";
@@ -59,6 +60,7 @@ require_once '../templates/header.php';
       $description = mysqli_real_escape_string($conn, $_POST['description']);
 
       $price = $_POST['price'];
+      $cost_price = $_POST['cost_price'];
       $categoryId = $_POST['categoryId'];
       $id = mysqli_real_escape_string($conn, $_POST['id']);
     
@@ -72,9 +74,9 @@ require_once '../templates/header.php';
         if (in_array($fileExt, $allowedTypes)) {
           if (move_uploaded_file($fileTmpName, $targetFilePath)) {
             if(strlen($description)>0)
-            $sql = "UPDATE products SET name='$name', description='$description',price='$price',image='$fileName',category_id='$categoryId' WHERE id=$id";
+            $sql = "UPDATE products SET name='$name', description='$description',price='$price',cost_price='$cost_price',image='$fileName',category_id='$categoryId' WHERE id=$id";
             else
-            $sql = "UPDATE products SET name='$name',price='$price',image='$fileName',category_id='$categoryId' WHERE id=$id";
+            $sql = "UPDATE products SET name='$name',price='$price',cost_price='$cost_price',image='$fileName',category_id='$categoryId' WHERE id=$id";
             if(mysqli_query($conn, $sql)){
                 session_start();
                 $_SESSION['update'] = "The Product has been updated successfully!";
@@ -95,7 +97,7 @@ require_once '../templates/header.php';
         $row = mysqli_fetch_assoc($result);
         $existingImagePath = $row['image'];
     
-        $sql = "UPDATE products SET name='$name', description='$description',price='$price',image='$existingImagePath',category_id='$categoryId' WHERE id=$id";
+        $sql = "UPDATE products SET name='$name', description='$description',price='$price',cost_price='$cost_price',image='$existingImagePath',category_id='$categoryId' WHERE id=$id";
         if (mysqli_query($conn, $sql)) {
           session_start();
           $_SESSION['update'] = "The Product has been updated successfully!";

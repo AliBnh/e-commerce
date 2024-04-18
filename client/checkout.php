@@ -84,7 +84,7 @@ if(isset($_POST['checkout'])){
     $sqlUpdateUser = "UPDATE users SET username = '$name', email = '$email', phone_number = '$phone', address = '$address' WHERE id = $user_id";
     mysqli_query($conn, $sqlUpdateUser);
 
-    $sql = "INSERT INTO orders (user_id, address, total,payment_method) VALUES ('$user_id','$address','$total','$payment_method')";
+    $sql = "INSERT INTO orders (user_id, total,payment_method) VALUES ('$user_id','$total','$payment_method')";
     mysqli_query($conn, $sql);
     $sqlGetOrderId = "SELECT id FROM orders WHERE user_id = $user_id ORDER BY id DESC LIMIT 1";
     $result = mysqli_query($conn, $sqlGetOrderId);

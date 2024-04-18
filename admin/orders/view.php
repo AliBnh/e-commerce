@@ -37,7 +37,6 @@ require_once '../templates/header.php';
                             echo "<h3>Order ID: ".$row['id']."</h3>";
                             echo "<p>Order Status: ".$row['status']."</p>";
                             echo "<p>Order Date: ".$row['created_at']."</p>";
-                            echo "<p>Address: ".$row['address']."</p>";
                             echo "<p>Payment Method: ".$row['payment_method']."</p>";
                             echo "<p>Total: ".$row['total']."</p>";
                             echo "<p>Customer Details: <a href='../customers/view.php?id=".$row['user_id']."' class='btn btn-info'>View</a></p>";

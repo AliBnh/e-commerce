@@ -37,7 +37,6 @@ require_once '../templates/header.php';
                 <tr>
                     <th>#</th>
                     <th>Order date</th>
-                    <th>Address</th>
                     <th>Payment method</th>
                     <th>Status</th>
                     <th>total</th>
@@ -54,7 +53,6 @@ require_once '../templates/header.php';
                             echo "<tr>";
                             echo "<td>".$row['id']."</td>";
                             echo "<td>".$row['created_at']."</td>";
-                            echo "<td>".$row['address']."</td>";
                             echo "<td>".$row['payment_method']."</td>";
                             echo "<td>".$row['status']."</td>";
                             echo "<td>".$row['total']."</td>";
