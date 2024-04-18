@@ -45,6 +45,7 @@ require_once '../templates/header.php';
                             echo "<h2>".$row['username']."</h2>";
                             echo "<p><strong>Email: </strong>".$row['email']."</p>";
                             echo "<p><strong>Address: </strong>".$row['address']."</p>";  
+                            echo "<p><strong>Phone number: </strong>".$row['phone_number']."</p>";  
                             echo "<h4>Orders</h4>";
                             if(count($orderIds) > 0){
                                 echo "<ul>";

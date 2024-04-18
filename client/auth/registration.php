@@ -46,6 +46,8 @@
                          echo"<div class='alert alert-success'>Registered successfully</div>";
                          session_start();
                         $_SESSION['user']="yes";
+                        $_SESSION['username']=$userUsername["username"];
+                        $_SESSION['id']=$userUsername["id"];
                         header("Location: ../index.php");
                         die();
                     }else{

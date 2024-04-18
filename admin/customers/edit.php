@@ -33,10 +33,13 @@ require_once '../templates/header.php';
                 <input type="text" name="username" class="form-control" placeholder="Username "  value="<?php echo $row["username"];?>" required>
             </div>
             <div class="form-element my-4">
-                <input type="email" name="email" value="<?php echo $row["email"];?>" class="form-control" placeholder="Email  ">
+                <input type="email" name="email" value="<?php echo $row["email"];?>" class="form-control" placeholder="Email " required>
             </div>
             <div class="form-element my-4">
-                <input type="text" name="address" class="form-control" placeholder="Address "  value="<?php echo $row["address"];?>" required>
+                <input type="text" name="address" class="form-control" placeholder="Address "  value="<?php echo $row["address"];?>" >
+            </div>
+            <div class="form-element my-4">
+                <input type="text" name="phone_number" class="form-control" placeholder="Phone Number "  value="<?php echo $row["phone_number"];?>" >
             </div>
 
             <input type="hidden" name="id" value="<?php echo $_GET['id'];?>">

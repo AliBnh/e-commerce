@@ -45,12 +45,53 @@ require_once "header.php";
                             $categoryNameRows = mysqli_query($conn, $fetchCategoryNameSql);
                             $categoryNameRow = mysqli_fetch_assoc($categoryNameRows);
                             echo "<p><strong>category: </strong>".$categoryNameRow['name']."</p>";
+                            echo "<form action='' method='post'>";
+                            echo "<input type='hidden' name='id' value='".$row['id']."'>";
+                            echo "<input type='hidden' name='name' value='".$row['name']."'>";
+                            echo "<input type='hidden' name='price' value='".$row['price']."'>";
+                            echo "<input type='hidden' name='image' value='".$row['image']."'>";
+                            echo "<input type='hidden' name='quantity' value='1'>";
+                            echo "<button type='submit' name='add' class='btn btn-success'>Add to Cart</button>";
+                            echo "</form>";
                         }
                     }else{
                         echo "No Product found";
                     }
                 }else{
                     header("Location: index.php");
+                }
+                if(isset($_POST['add'])){
+                    $id = mysqli_real_escape_string($conn, $_POST['id']);
+                    $name = mysqli_real_escape_string($conn, $_POST['name']);
+                    $price = mysqli_real_escape_string($conn, $_POST['price']);
+                    $image = mysqli_real_escape_string($conn, $_POST['image']);
+                    $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
+    
+                    if(isset($_COOKIE['cart'])){
+                        $cookie_data = stripslashes($_COOKIE['cart']);
+                        $cart_data = json_decode($cookie_data, true);
+                    }else{
+                        $cart_data = array();
+                    }
+                    $item_id_list = array_column($cart_data, 'item_id');
+                    if(in_array($id, $item_id_list)){
+                        foreach($cart_data as $keys => $values){
+                            if($cart_data[$keys]['item_id'] == $id){
+                                $cart_data[$keys]['item_quantity'] = $cart_data[$keys]['item_quantity'] + $quantity;
+                            }
+                        }
+                    }else{
+                        $item_array = array(
+                            'item_id' => $id,
+                            'item_name' => $name,
+                            'item_price' => $price,
+                            'item_image' => $image,
+                            'item_quantity' => $quantity
+                        );
+                        $cart_data[] = $item_array;
+                    }
+                    $item_data = json_encode($cart_data);
+                    setcookie('cart', $item_data, time() + (86400 * 30));
                 }
             ?>
         </div>

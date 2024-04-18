@@ -8,6 +8,7 @@ require_once '../templates/header.php';
         $name = mysqli_real_escape_string($conn, $_POST['username']);
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $address = mysqli_real_escape_string($conn, $_POST['address']);
+        $phone = mysqli_real_escape_string($conn, $_POST['phone_number']);
 
         $checkExistence = "SELECT * FROM users WHERE LOWER(email) = LOWER('$email') AND id != $id";
         $result = mysqli_query($conn, $checkExistence);
@@ -16,7 +17,7 @@ require_once '../templates/header.php';
             echo "User with this email $email exists";
             exit;
         }else{
-        $sql = "UPDATE users SET username='$name', email='$email',address='$address' WHERE id=$id";
+        $sql = "UPDATE users SET username='$name', email='$email',address='$address',phone_number=$phone, WHERE id=$id";
         if(mysqli_query($conn, $sql)){
             session_start();
             $_SESSION['update'] = "The User has been updated successfully!";

@@ -33,6 +33,7 @@
                         $resultUsername = mysqli_query($conn,$sqlUsername);
                         $userUsername = mysqli_fetch_array($resultUsername, MYSQLI_ASSOC);
                         $_SESSION['username']=$userUsername["username"];
+                        $_SESSION['id']=$userUsername["id"];
                         header("Location: ../index.php");
                         die();
                     }else{

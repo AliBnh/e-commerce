@@ -39,6 +39,7 @@ require_once '../templates/header.php';
                     <th>UserName</th>
                     <th>Email</th>
                     <th>Address</th>
+                    <th>Phone Number</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -54,6 +55,7 @@ require_once '../templates/header.php';
                             echo "<td>".$row['username']."</td>";
                             echo "<td>".$row['email']."</td>";
                             echo "<td>".$row['address']."</td>";
+                            echo "<td>".$row['phone_number']."</td>";
                             echo "<td>";
                             echo "<a href='view.php?id=".$row['id']."' class='btn btn-primary mx-1'>Read More</a>";
                             echo "<a href='edit.php?id=".$row['id']."' class='btn btn-warning mx-1'>Edit</a>";
