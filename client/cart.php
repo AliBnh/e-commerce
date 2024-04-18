@@ -1,68 +1,34 @@
 <?php
 require_once "header.php";
 
-// if(isset($_POST['updateQuantity'])){
-//     $id = mysqli_real_escape_string($conn, $_POST['item_id']);
-//     $quantity =  mysqli_real_escape_string($conn, $_POST['quantity']);
-//     $cart = json_decode($_COOKIE['cart'],true);
-//     $cartLength = count($cart);
-//     for ($i = 0; $i < count($cart); $i++) {
-//         if($cart[$i]['item_id'] == $id){
-//           $cart[$i]['item_quantity'] = $quantity;
-//           break; 
-//         }
-//       }
-//     setcookie('cart',json_encode($cart),time() + (86400 * 30));
-//     header('Location: cart.php');
-// }
-// if(isset($_POST['removeProduct'])){
-//     $id = mysqli_real_escape_string($conn, $_POST['item_id']);
-//     $cart = json_decode($_COOKIE['cart'],true);
-//     $cartLength = count($cart);
-//     for ($i = 0; $i < $cartLength; $i++) {
-//         if($cart[$i]['item_id'] == $id){
-//             unset($cart[$i]);
-//         }
-//     }
-//     $cart = array_values($cart);
-//     setcookie('cart',json_encode($cart),time() + (86400 * 30));
-//     header('Location: cart.php');
-// }
-
-if (isset($_POST['updateQuantity'])) {
-  $id = mysqli_real_escape_string($conn, $_POST['item_id']);
-  $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
-
-  // Check if the cart exists in the session
-  if (isset($_SESSION['cart'])) {
-    $cart_data = &$_SESSION['cart']; // Get a reference to the cart
-    foreach ($cart_data as $key => $item) {
-      if ($item['item_id'] == $id) {
-        $cart_data[$key]['item_quantity'] = $quantity;
-        break;
+if(isset($_POST['updateQuantity'])){
+    $id = mysqli_real_escape_string($conn, $_POST['item_id']);
+    $quantity =  mysqli_real_escape_string($conn, $_POST['quantity']);
+    $cart = json_decode($_COOKIE['cart'],true);
+    $cartLength = count($cart);
+    for ($i = 0; $i < count($cart); $i++) {
+        if($cart[$i]['item_id'] == $id){
+          $cart[$i]['item_quantity'] = $quantity;
+          break; 
+        }
       }
+    setcookie('cart',json_encode($cart),time() + (86400 * 30));
+    header('Location: cart.php');
+}
+if(isset($_POST['removeProduct'])){
+    $id = mysqli_real_escape_string($conn, $_POST['item_id']);
+    $cart = json_decode($_COOKIE['cart'],true);
+    $cartLength = count($cart);
+    for ($i = 0; $i < $cartLength; $i++) {
+        if($cart[$i]['item_id'] == $id){
+            unset($cart[$i]);
+        }
     }
-  }
-
-  // No need to redirect as session data is already updated
+    $cart = array_values($cart);
+    setcookie('cart',json_encode($cart),time() + (86400 * 30));
+    header('Location: cart.php');
 }
 
-if (isset($_POST['removeProduct'])) {
-  $id = mysqli_real_escape_string($conn, $_POST['item_id']);
-
-  if (isset($_SESSION['cart'])) {
-    $cart_data = &$_SESSION['cart']; // Get a reference to the cart
-    foreach ($cart_data as $key => $item) {
-      if ($item['item_id'] == $id) {
-        unset($cart_data[$key]);
-        break;
-      }
-    }
-    $cart_data = array_values($cart_data); // Re-index the array after removal
-  }
-
-  // No need to redirect as session data is already updated
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -89,67 +55,35 @@ if (isset($_POST['removeProduct'])) {
             </thead>
             <tbody>
                 <?php
-                    // $total = 0;
-                    // if(isset($_COOKIE['cart'])){
-                    //     $cart = json_decode($_COOKIE['cart'],true);
-                    //     $cartLength = count($cart);
-                    //     for ($i = 0; $i < $cartLength; $i++) {                          
-                    //         $id = $cart[$i]['item_id'];
-                    //         $quantity = $cart[$i]['item_quantity'];
-                    //         $sql = "SELECT * FROM products WHERE id=$id";
-                    //         $result = mysqli_query($conn,$sql);
-                    //         $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                    //         $total += $product['price'] * $quantity;
-                    //         echo "<tr>";
-                    //         echo "<td><img src='../uploads/".$product['image']."' width='100' height='100'></td>";
-                    //         echo "<td>".$product['name']."</td>";
-                    //         echo "<td>".$product['price']."</td>";
-                    //         echo "<td>".$quantity."</td>";
-                    //         echo "<td>".$product['price'] * $quantity."</td>";
-                    //         echo "<td>
-                    //         <form action='' method='post'>
-                    //           <input type='hidden' name='item_id' value='" . $product['id'] . "'>
-                    //           <input type='number' name='quantity' value='" . $quantity . "' min='1' style='width: 30px;'>
-                    //           <button type='submit' name='updateQuantity' class='btn btn-sm btn-primary'>Update</button>
-                    //         </form>
-                    //         <form action='' method='post'>
-                    //           <input type='hidden' name='item_id' value='" . $product['id'] . "'>
-                    //           <button type='submit' name='removeProduct' class='btn btn-sm btn-danger'>Remove</button>
-                    //         </form>
-                    //       </td>";
-                    //         echo "</tr>";
-                    //     }    
                     $total = 0;
-                    if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-                      $cart_data = $_SESSION['cart'];
-                      foreach ($cart_data as $item) {
-                        $id = $item['item_id'];
-                        $quantity = $item['item_quantity'];
-            
-                        $sql = "SELECT * FROM products WHERE id=$id";
-                        $result = mysqli_query($conn, $sql);
-                        $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
-            
-                        $total += $product['price'] * $quantity;
-                        echo "<tr>";
-                        echo "<td><img src='../uploads/" . $product['image'] . "' width='100' height='100'></td>";
-                        echo "<td>" . $product['name'] . "</td>";
-                        echo "<td>" . $product['price'] . "</td>";
-                        echo "<td>" . $quantity . "</td>";
-                        echo "<td>" . $product['price'] * $quantity . "</td>";
-                        echo "<td>
-                          <form action='' method='post'>
-                            <input type='hidden' name='item_id' value='" . $product['id'] . "'>
-                            <input type='number' name='quantity' value='" . $quantity . "' min='1' style='width: 30px;'>
-                            <button type='submit' name='updateQuantity' class='btn btn-sm btn-primary'>Update</button>
-                          </form>
-                          <form action='' method='post'>
-                            <input type='hidden' name='item_id' value='" . $product['id'] . "'>
-                            <button type='submit' name='removeProduct' class='btn btn-sm btn-danger'>Remove</button>
-                          </form>
-                        </td>";
-                        echo "</tr>";
-                      }
+                    if(isset($_COOKIE['cart'])){
+                        $cart = json_decode($_COOKIE['cart'],true);
+                        $cartLength = count($cart);
+                        for ($i = 0; $i < $cartLength; $i++) {                          
+                            $id = $cart[$i]['item_id'];
+                            $quantity = $cart[$i]['item_quantity'];
+                            $sql = "SELECT * FROM products WHERE id=$id";
+                            $result = mysqli_query($conn,$sql);
+                            $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                            $total += $product['price'] * $quantity;
+                            echo "<tr>";
+                            echo "<td><img src='../uploads/".$product['image']."' width='100' height='100'></td>";
+                            echo "<td>".$product['name']."</td>";
+                            echo "<td>".$product['price']."</td>";
+                            echo "<td>".$quantity."</td>";
+                            echo "<td>".$product['price'] * $quantity."</td>";
+                            echo "<td>
+                            <form action='' method='post'>
+                              <input type='hidden' name='item_id' value='" . $product['id'] . "'>
+                              <input type='number' name='quantity' value='" . $quantity . "' min='1' style='width: 30px;'>
+                              <button type='submit' name='updateQuantity' class='btn btn-sm btn-primary'>Update</button>
+                            </form>
+                            <form action='' method='post'>
+                              <input type='hidden' name='item_id' value='" . $product['id'] . "'>
+                              <button type='submit' name='removeProduct' class='btn btn-sm btn-danger'>Remove</button>
+                            </form>
+                          </td>";
+                        }    
                     }else {
                         echo "<tr><td colspan='6'>Your cart is empty</td></tr>";
                     }

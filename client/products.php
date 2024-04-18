@@ -154,80 +154,40 @@ require_once "header.php";
                     }
                 }
             }
-            // if(isset($_POST['add'])){
-            //     $id = mysqli_real_escape_string($conn, $_POST['id']);
-            //     $name = mysqli_real_escape_string($conn, $_POST['name']);
-            //     $price = mysqli_real_escape_string($conn, $_POST['price']);
-            //     $image = mysqli_real_escape_string($conn, $_POST['image']);
-            //     $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
+            if(isset($_POST['add'])){
+                $id = mysqli_real_escape_string($conn, $_POST['id']);
+                $name = mysqli_real_escape_string($conn, $_POST['name']);
+                $price = mysqli_real_escape_string($conn, $_POST['price']);
+                $image = mysqli_real_escape_string($conn, $_POST['image']);
+                $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
 
-            //     if(isset($_COOKIE['cart'])){
-            //         $cookie_data = stripslashes($_COOKIE['cart']);
-            //         $cart_data = json_decode($cookie_data, true);
-            //     }else{
-            //         $cart_data = array();
-            //     }
-            //     $item_id_list = array_column($cart_data, 'item_id');
-            //     if(in_array($id, $item_id_list)){
-            //         foreach($cart_data as $keys => $values){
-            //             if($cart_data[$keys]['item_id'] == $id){
-            //                 $cart_data[$keys]['item_quantity'] = $cart_data[$keys]['item_quantity'] + $quantity;
-            //             }
-            //         }
-            //     }else{
-            //         $item_array = array(
-            //             'item_id' => $id,
-            //             'item_name' => $name,
-            //             'item_price' => $price,
-            //             'item_image' => $image,
-            //             'item_quantity' => $quantity
-            //         );
-            //         $cart_data[] = $item_array;
-            //     }
-            //     $item_data = json_encode($cart_data);
-            //     setcookie('cart', $item_data, time() + (86400 * 30));
-            // }
-
-            session_start(); // Start the PHP session
-            
-            if (isset($_POST['add'])) {
-              $id = mysqli_real_escape_string($conn, $_POST['id']);
-              $name = mysqli_real_escape_string($conn, $_POST['name']);
-              $price = mysqli_real_escape_string($conn, $_PRICE['price']);
-              $image = mysqli_real_escape_string($conn, $_POST['image']);
-              $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
-            
-              // Check if a cart exists in the session
-              if (!isset($_SESSION['cart'])) {
-                $_SESSION['cart'] = array(); // Initialize an empty cart array
-              }
-            
-              $cart_data = &$_SESSION['cart']; // Get a reference to the cart in the session
-            
-              $item_id_list = array_column($cart_data, 'item_id');
-            
-              if (in_array($id, $item_id_list)) {
-                foreach ($cart_data as $keys => $values) {
-                  if ($cart_data[$keys]['item_id'] == $id) {
-                    $cart_data[$keys]['item_quantity'] = $cart_data[$keys]['item_quantity'] + $quantity;
-                  }
+                if(isset($_COOKIE['cart'])){
+                    $cookie_data = stripslashes($_COOKIE['cart']);
+                    $cart_data = json_decode($cookie_data, true);
+                }else{
+                    $cart_data = array();
                 }
-              } else {
-                $item_array = array(
-                  'item_id' => $id,
-                  'item_name' => $name,
-                  'item_price' => $price,
-                  'item_image' => $image,
-                  'item_quantity' => $quantity
-                );
-                $cart_data[] = $item_array; // Add the new item to the cart
-              }
-            
-              // No need to encode/decode data as it's stored in the session directly
+                $item_id_list = array_column($cart_data, 'item_id');
+                if(in_array($id, $item_id_list)){
+                    foreach($cart_data as $keys => $values){
+                        if($cart_data[$keys]['item_id'] == $id){
+                            $cart_data[$keys]['item_quantity'] = $cart_data[$keys]['item_quantity'] + $quantity;
+                        }
+                    }
+                }else{
+                    $item_array = array(
+                        'item_id' => $id,
+                        'item_name' => $name,
+                        'item_price' => $price,
+                        'item_image' => $image,
+                        'item_quantity' => $quantity
+                    );
+                    $cart_data[] = $item_array;
+                }
+                $item_data = json_encode($cart_data);
+                setcookie('cart', $item_data, time() + (86400 * 30));
             }
-            
-            ?>
-            
+
     ?>
     
 </body>

@@ -49,36 +49,20 @@ if(!isset($_SESSION['user'])){
         <hr/>
         <?php
         //print the cart items and total from cart stored in cookies
-        // $cart = json_decode($_COOKIE['cart'],true);
-        // $cartLength = count($cart);
-        // $total = 0;
-        // for ($i = 0; $i < $cartLength; $i++) {  
-        //     $id = $cart[$i]['item_id'];
-        //     $quantity = $cart[$i]['item_quantity'];
-        //     $sql = "SELECT * FROM products WHERE id=$id";
-        //     $result = mysqli_query($conn,$sql);
-        //     $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
-        //     $total += $product['price'] * $quantity;
-        //     echo "<li>".$product['name']." - ".$product['price']." x ".$quantity."</li>";
-        // }
-        // echo "<p><strong>Total: ".$total."</strong></p>";
-        // echo "<input type='hidden' name='total' value='".$total."'>";
-        $cart_data = $_SESSION['cart'];
+        $cart = json_decode($_COOKIE['cart'],true);
+        $cartLength = count($cart);
         $total = 0;
-        foreach ($cart_data as $item) {
-          $id = $item['item_id'];
-          $quantity = $item['item_quantity'];
-
-          $sql = "SELECT * FROM products WHERE id=$id";
-          $result = mysqli_query($conn, $sql);
-          $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
-
-          $total += $product['price'] * $quantity;
-          echo "<li>" . $product['name'] . " - " . $product['price'] . " x " . $quantity . "</li>";
+        for ($i = 0; $i < $cartLength; $i++) {  
+            $id = $cart[$i]['item_id'];
+            $quantity = $cart[$i]['item_quantity'];
+            $sql = "SELECT * FROM products WHERE id=$id";
+            $result = mysqli_query($conn,$sql);
+            $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            $total += $product['price'] * $quantity;
+            echo "<li>".$product['name']." - ".$product['price']." x ".$quantity."</li>";
         }
-        echo "<p><strong>Total: " . $total . "</strong></p>";
-        echo "<input type='hidden' name='total' value='" . $total . "'>";
-
+        echo "<p><strong>Total: ".$total."</strong></p>";
+        echo "<input type='hidden' name='total' value='".$total."'>";
         ?>
         <div class="form-group">
             <input type="submit" class="btn btn-primary" name="checkout" value="Checkout">
@@ -107,35 +91,21 @@ if(isset($_POST['checkout'])){
     $result = mysqli_query($conn, $sqlGetOrderId);
     $row = mysqli_fetch_array($result);
     $order_id = $row['id'];
+        $cart = json_decode($_COOKIE['cart'],true);
+        $cartLength = count($cart);
+        $total = 0;
+        for ($i = 0; $i < $cartLength; $i++) {  
+            $id = $cart[$i]['item_id'];
+            $quantity = $cart[$i]['item_quantity'];
+            $sql = "SELECT * FROM products WHERE id=$id";
+            $result = mysqli_query($conn,$sql);
+            $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            $total = $product['price'] * $quantity;
+            $sqlInsertOrderDetails = "INSERT INTO order_items (order_id, product_id, quantity, total) VALUES ('$order_id','$id','$quantity','$total')";
+            mysqli_query($conn, $sqlInsertOrderDetails);
 
-    //     $cart = json_decode($_COOKIE['cart'],true);
-    //     $cartLength = count($cart);
-    //     $total = 0;
-    //     for ($i = 0; $i < $cartLength; $i++) {  
-    //         $id = $cart[$i]['item_id'];
-    //         $quantity = $cart[$i]['item_quantity'];
-    //         $sql = "SELECT * FROM products WHERE id=$id";
-    //         $result = mysqli_query($conn,$sql);
-    //         $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
-    //         $total = $product['price'] * $quantity;
-    //         $sqlInsertOrderDetails = "INSERT INTO order_items (order_id, product_id, quantity, total) VALUES ('$order_id','$id','$quantity','$total')";
-    //         mysqli_query($conn, $sqlInsertOrderDetails);
-
-    // }
-    // setcookie('cart', '', time() - 3600);
-    $cart_data = $_SESSION['cart'];
-    foreach ($cart_data as $item) {
-      $id = $item['item_id'];
-      $quantity = $item['item_quantity'];
-      $total = $item['price'] * $quantity; // Assuming price is stored in the cart item
-
-      $sqlInsertOrderDetails = "INSERT INTO order_items (order_id, product_id, quantity, total) VALUES ('$order_id','$id','$quantity','$total')";
-      mysqli_query($conn, $sqlInsertOrderDetails);
     }
-  }
-
-  // Clear the cart after checkout
-  unset($_SESSION['cart']);
+    setcookie('cart', '', time() - 3600);
     // header("Location: ./index.php");
-
+}
 ?>

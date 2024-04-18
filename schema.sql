@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2024 at 05:15 PM
+-- Generation Time: Apr 18, 2024 at 10:30 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -64,7 +64,8 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `address`, `payment_method`, `status`, `created_at`, `total`) VALUES
-(3, 3, 'Res kenitra 3, imm 2 , app 4', 'cash_on_delivery', 'pending', '2024-04-16 18:55:01', 2750.00);
+(10, 5, 'dazaedEZD', 'cash_on_delivery', 'pending', '2024-04-18 10:03:56', 4700.00),
+(11, 5, 'dazaedEZD', 'cash_on_delivery', 'pending', '2024-04-18 10:11:59', 2000.00);
 
 -- --------------------------------------------------------
 
@@ -85,8 +86,10 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `total`) VALUES
-(7, 3, 20, 1, 650.00),
-(8, 3, 23, 1, 2100.00);
+(11, 10, 18, 3, 2700.00),
+(12, 10, 19, 2, 2000.00),
+(13, 11, 20, 2, 1300.00),
+(14, 11, 21, 1, 700.00);
 
 -- --------------------------------------------------------
 
@@ -128,6 +131,7 @@ CREATE TABLE `users` (
   `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `address` varchar(100) DEFAULT NULL,
+  `phone_number` varchar(20) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `is_admin` tinyint(1) NOT NULL DEFAULT 0,
   `archived` tinyint(1) NOT NULL DEFAULT 0
@@ -137,11 +141,12 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `address`, `password`, `is_admin`, `archived`) VALUES
-(1, 'ali', 'ali@mail.com', '', 'ali', 1, 0),
-(2, 'alex', 'alex@mail.com', 'Res alex 3 route tan, imm 8', 'alex', 0, 0),
-(3, 'said', 'said@mail.com', 'Res Said 1 route kenitra', 'said', 0, 0),
-(5, 'test', 'test@mail.com', NULL, '$2y$10$DmhVKqSLOkJtPyBIBrLkcehFk4J3bVzjVrcFzwHDnI09nP5uGBl5m', 0, 0);
+INSERT INTO `users` (`id`, `username`, `email`, `address`, `phone_number`, `password`, `is_admin`, `archived`) VALUES
+(1, 'ali', 'ali@mail.com', '', NULL, 'ali', 1, 0),
+(2, 'alex', 'alex@mail.com', 'Res alex 3 route tan, imm 8', NULL, 'alex', 0, 0),
+(3, 'said', 'said@mail.com', 'Res Said 1 route kenitra', NULL, 'said', 0, 0),
+(5, 'test', 'test@mail.com', 'dazaedEZD', '987Y322', '$2y$10$DmhVKqSLOkJtPyBIBrLkcehFk4J3bVzjVrcFzwHDnI09nP5uGBl5m', 0, 0),
+(6, 't', 't@mail.com', NULL, NULL, '$2y$10$oFvsfSvFAGfvjBvIlv2vLeiX0nQrNzYGPe1yffvjB4/loJQXs0UkK', 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -196,13 +201,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -214,7 +219,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
