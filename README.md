@@ -47,7 +47,7 @@
 - Shows a detailed description of the product.
 - Provides the option to add the product to the cart.
 
-### Cart/Checkout Page (separate them)
+### Cart page & sidebar
 
 - Allows modification of products in the cart.
 - Provides a button to checkout.
