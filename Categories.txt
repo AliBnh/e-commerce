@@ -1,5 +1,12 @@
+Collect assets (product 6 images (6products) for top 3 categories)
+Find a perfect modern UI kit & Collect Forms/Tables/Sidebar/Buttons/Login page
+Then start Coding
+Deadline for the admin side  : Tonight Post Ishae
 
-
+Websites to find product images :
+	Unsplash
+	Pexels
+	Freepik
 
 Doughnuts:
 	Glazed Doughnuts
