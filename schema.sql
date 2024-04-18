@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2024 at 03:28 PM
+-- Generation Time: Apr 18, 2024 at 06:21 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -64,7 +64,6 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `payment_method`, `status`, `created_at`, `total`) VALUES
-(10, 5, 'cash_on_delivery', 'pending', '2024-04-18 10:03:56', 4700.00),
 (11, 5, 'cash_on_delivery', 'pending', '2024-04-18 10:11:59', 2000.00),
 (12, 5, 'cash_on_delivery', 'completed', '2024-04-18 10:46:15', 1400.00),
 (13, 5, 'cash_on_delivery', 'pending', '2024-04-18 10:52:50', 522.00),
@@ -89,8 +88,6 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `total`) VALUES
-(11, 10, 18, 3, 2700.00),
-(12, 10, 19, 2, 2000.00),
 (13, 11, 20, 2, 1300.00),
 (14, 11, 21, 1, 700.00),
 (15, 12, 21, 2, 1400.00),
@@ -151,11 +148,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `address`, `phone_number`, `password`, `is_admin`, `archived`) VALUES
-(1, 'ali', 'ali@mail.com', '', NULL, 'ali', 1, 0),
 (2, 'alex', 'alex@mail.com', 'Res alex 3 route tan, imm 8', NULL, 'alex', 0, 0),
 (3, 'said', 'said@mail.com', 'Res Said 1 route kenitra', NULL, 'said', 0, 0),
 (5, 'test', 'test@mail.com', 'Res halima, imm 2, app 4', '066320871', '$2y$10$DmhVKqSLOkJtPyBIBrLkcehFk4J3bVzjVrcFzwHDnI09nP5uGBl5m', 0, 0),
-(6, 't', 't@mail.com', 'freaz', '32', '$2y$10$oFvsfSvFAGfvjBvIlv2vLeiX0nQrNzYGPe1yffvjB4/loJQXs0UkK', 0, 0);
+(6, 't', 't@mail.com', 'freaz', '32', '$2y$10$oFvsfSvFAGfvjBvIlv2vLeiX0nQrNzYGPe1yffvjB4/loJQXs0UkK', 0, 0),
+(11, 'te', 'nihysi@mailinator.com', 'Reiciendis laborum ', '+1 (632) 449-8016', '$2y$10$iueXMBzkcYtSe159dNuja.GBtsHHyGIPofcdsikYN2l3Vj.Q/LJbO', 1, 0),
+(12, 'ali', 'ali@mail.com', 'faerz', '423', '$2y$10$ukm/KHMHuAfApHAVh7UPjeajRi1jVw9xY.rCyBLt7XVnS./N7c3hC', 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -228,7 +226,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
