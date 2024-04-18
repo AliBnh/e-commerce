@@ -15,6 +15,9 @@ require_once '../templates/header.php';
 <div class="container">
         <header class="d-flex justify-content-between my-4">
             <h1 class="text-center my-4">Orders List</h1>
+            <div>
+                <a href="create.php" class="btn btn-primary">Place order</a>
+            </div>
         </header>
         <?php
             if(!$_SESSION)
