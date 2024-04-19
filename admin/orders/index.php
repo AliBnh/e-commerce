@@ -2,6 +2,7 @@
 require_once '../templates/header.php';
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +17,7 @@ require_once '../templates/header.php';
         <header class="d-flex justify-content-between my-4">
             <h1 class="text-center my-4">Orders List</h1>
             <div>
+                //Not developed yet, Create & Edit order pages
                 <a href="create.php" class="btn btn-primary">Place order</a>
             </div>
         </header>
@@ -35,6 +37,16 @@ require_once '../templates/header.php';
                 unset($_SESSION['update']);
             }
         ?>
+        <form action="" method="get">
+        <div class="col-md-3">
+                <select name="sort" class="form-control">
+                    <option value="0">Sort by total</option>
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Sort</button>
+        </form>
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -47,9 +59,40 @@ require_once '../templates/header.php';
                 </tr>
             </thead>
             <tbody>
-               <?php
-        require_once "../../includes/db_connect.php";
-        $sql = "SELECT * FROM orders";
+            <?php
+            require_once "../../includes/db_connect.php";
+            if(isset($_GET['sort'])){
+                $sort = $_GET['sort'];
+                if($sort == 'asc'){
+                    $sql = "SELECT * FROM orders ORDER BY total ASC";
+                }else if($sort == 'desc'){
+                    $sql = "SELECT * FROM orders ORDER BY total DESC";
+                }
+                if($sort == 0){
+                    $sql = "SELECT * FROM orders";
+                }
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result) > 0){
+                    while($row = mysqli_fetch_assoc($result)){
+                        echo "<tr>";
+                        echo "<td>".$row['id']."</td>";
+                        echo "<td>".$row['created_at']."</td>";
+                        echo "<td>".$row['payment_method']."</td>";
+                        echo "<td>".$row['status']."</td>";
+                        echo "<td>".$row['total']."</td>";
+                        echo "<td>";
+                        echo "<a href='view.php?id=".$row['id']."' class='btn btn-primary mx-1'>Order Items</a>";
+                        echo "<a href='edit.php?id=".$row['id']."' class='btn btn-success mx-1'>Edit</a>";
+                        echo "<a href='delete.php?id=".$row['id']."' class='btn btn-warning mx-1'>Delete</a>";
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                
+                }else{
+                    echo "<tr><td colspan='6'>No Orders were found</td></tr>";
+                }
+            }else{
+            $sql = "SELECT * FROM orders";
                     $result = mysqli_query($conn, $sql);
                     if(mysqli_num_rows($result) > 0){
                         while($row = mysqli_fetch_assoc($result)){
@@ -69,6 +112,7 @@ require_once '../templates/header.php';
                     }else{
                         echo "<tr><td colspan='6'>No Orders were found</td></tr>";
                     }
+                }
                 ?>
             </tbody>
         </table>
