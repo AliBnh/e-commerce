@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2024 at 06:21 PM
+-- Generation Time: Apr 19, 2024 at 01:20 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -150,10 +150,11 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `email`, `address`, `phone_number`, `password`, `is_admin`, `archived`) VALUES
 (2, 'alex', 'alex@mail.com', 'Res alex 3 route tan, imm 8', NULL, 'alex', 0, 0),
 (3, 'said', 'said@mail.com', 'Res Said 1 route kenitra', NULL, 'said', 0, 0),
-(5, 'test', 'test@mail.com', 'Res halima, imm 2, app 4', '066320871', '$2y$10$DmhVKqSLOkJtPyBIBrLkcehFk4J3bVzjVrcFzwHDnI09nP5uGBl5m', 0, 0),
-(6, 't', 't@mail.com', 'freaz', '32', '$2y$10$oFvsfSvFAGfvjBvIlv2vLeiX0nQrNzYGPe1yffvjB4/loJQXs0UkK', 0, 0),
+(5, 'test', 'test@mail.com', 'Res halima, imm 2, app 4', '066320871', '$2y$10$D6QvmpKF/X71a6uqnT0WNubyGZjEXp.fIYVyt0jmZlAahv1l8SXC6', 0, 0),
+(6, 't', 't@mail.com', 'freazfnzerji', '323', '$2y$10$oFvsfSvFAGfvjBvIlv2vLeiX0nQrNzYGPe1yffvjB4/loJQXs0UkK', 0, 0),
 (11, 'te', 'nihysi@mailinator.com', 'Reiciendis laborum ', '+1 (632) 449-8016', '$2y$10$iueXMBzkcYtSe159dNuja.GBtsHHyGIPofcdsikYN2l3Vj.Q/LJbO', 1, 0),
-(12, 'ali', 'ali@mail.com', 'faerz', '423', '$2y$10$ukm/KHMHuAfApHAVh7UPjeajRi1jVw9xY.rCyBLt7XVnS./N7c3hC', 1, 0);
+(12, 'ali', 'ali@mail.com', 'faerz', '423', '$2y$10$fxRt/2tWHTMoUjsRad6t8uacBCphjTKhr1G/z.ezK8lahg7Dn5X5i', 1, 0),
+(13, 'datocenun', 'syfola@mailinator.com', 'Sapiente omnis dolor', '+1 (521) 366-69848', '$2y$10$UicxnvmJ7400u0KZdAD9Qu2E/cwCSSFkg84P2pL9Yy5CoF57Jl/mi', 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -226,7 +227,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables

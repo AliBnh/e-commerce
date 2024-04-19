@@ -1,5 +1,8 @@
 <?php
-require_once "header.php";
+    session_start();
+    if(!isset($_SESSION['user'])){
+        header("Location: ./login.php");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +20,7 @@ require_once "header.php";
             <h1 class="text-center my-4">Edit Profile</h1>
         </header>
         <?php
-            include("../includes/db_connect.php");
+            require_once "../includes/db_connect.php";
             if(isset($_GET)){
                 $id= $_SESSION['id'];
                 $sql = "SELECT * FROM users WHERE id = $id";
@@ -31,12 +34,6 @@ require_once "header.php";
             </div>
             <div class="form-element my-4">
                 <input type="email" name="email" value="<?php echo $row["email"];?>" class="form-control" placeholder="Email  " required>
-            </div>
-            <div class="form-element my-4">
-                <input type="text" name="address" class="form-control" placeholder="Address "  value="<?php echo $row["address"];?>" >
-            </div>
-            <div class="form-element my-4">
-                <input type="text" name="phone_number" class="form-control" placeholder="Phone number "  value="<?php echo $row["phone_number"];?>" >
             </div>
             <div class="form-element my-4">
                 <input type="password" name="password" class="form-control" placeholder="New Password" >
@@ -65,8 +62,6 @@ if(isset($_POST['edit'])){
     $id= $_SESSION['id'];
     $name = mysqli_real_escape_string($conn, $_POST['username']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $address = mysqli_real_escape_string($conn, $_POST['address']);
-    $phone = mysqli_real_escape_string($conn, $_POST['phone_number']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
     $confirm_password = mysqli_real_escape_string($conn, $_POST['confirm_password']);
     $checkExistence = "SELECT * FROM users WHERE LOWER(email) = LOWER('$email') AND id != $id";
@@ -76,31 +71,22 @@ if(isset($_POST['edit'])){
         echo "User with this email $email exists";
         exit;
     }else{
-        $checkPhoneExistence = "SELECT * FROM users WHERE phone_number = '$phone' AND id != $id";
-        $resultPhone = mysqli_query($conn, $checkPhoneExistence);
-        $numRowsPhone = mysqli_num_rows($resultPhone);
-        if($numRowsPhone > 0){
-            echo "User with this phone number $phone exists";
-            exit;
-        }
-        else{
             if(strlen($password)>0){
                 if($password != $confirm_password){
                     echo "Passwords do not match";
                     exit;
                 }
                 $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-                $sql = "UPDATE users SET username='$name', email='$email', address='$address', phone_number='$phone', password='$passwordHash' WHERE id=$id";
+                $sql = "UPDATE users SET username='$name', email='$email', password='$passwordHash' WHERE id=$id";
                 if(mysqli_query($conn, $sql))
-                    header("Location: index.php");    
+                    header("Location: ./categories/index.php");    
             }else{
-                    $sql = "UPDATE users SET username='$name', email='$email', address='$address', phone_number='$phone' WHERE id=$id";
+                    $sql = "UPDATE users SET username='$name', email='$email' WHERE id=$id";
                     if(mysqli_query($conn, $sql)){
-                        header("Location: index.php");
+                        header("Location: ./categories/index.php");
                     }else{
                         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
                     }
-}        
-        }
+}                
     }
 }   

@@ -24,7 +24,7 @@
 
 ### Client
 
-- **Navbar:** 
+- **Navbar:**
   - Contains links to all the app's pages.
   - Includes a search bar for products.
   - Includes a link to the cart.
@@ -94,7 +94,6 @@
 
 - `id` (int): Unique identifier for the order (primary key)
 - `user_id` (int): Foreign key referencing the user who placed the order (links to users.id)
-- `address` (text): Billing/shipping address for the order
 - `payment_method` (enum): Payment method used for the order (credit_card, cash_on_delivery)
 - `status` (enum): Current status of the order (pending, processing, shipped, completed, cancelled)
 - `created_at` (datetime): Date and time the order was created
@@ -139,4 +138,3 @@
 - `products.category_id` references `categories.id` (a category can have many products)
 
 ![image](https://github.com/AliBnh/e-commerce/assets/107149305/517fca79-a4c2-4231-86b1-8354926c67e6)
-

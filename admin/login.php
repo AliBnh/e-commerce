@@ -28,6 +28,9 @@
                         // if($password==$user["password"]){
                         session_start();
                         $_SESSION['user']="yes";
+                        $_SESSION['id']=$user['id'];
+                        $_SESSION['username']=$user['username'];
+                        
                         header("Location: ./categories/index.php");
                         die();
                     }else{
