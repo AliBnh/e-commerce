@@ -1,7 +1,16 @@
 <?php
 require_once '../templates/header.php';
 ?>
-
+<?php
+if(isset($_POST['sort'])){
+    $category = $_POST['category'];
+    if($category == 0){
+        header("Location: index.php");
+    }else{
+        header("Location: index.php?category=".$category);
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +44,27 @@ require_once '../templates/header.php';
                 unset($_SESSION['update']);
             }
         ?>
+        <form action="" method="post">
+            <div class="form-element my-4">
+                <select name="category" class="form-control">
+                    <option value="0">All Categories</option>
+                    <?php
+                        require_once "../../includes/db_connect.php";
+                        $sql = "SELECT * FROM categories WHERE archived = 0";
+                        $result = mysqli_query($conn, $sql);
+                        if(mysqli_num_rows($result) > 0){
+                            while($row = mysqli_fetch_assoc($result)){
+                                echo "<option value='".$row['id']."'>".$row['name']."</option>";
+                            }
+                        }
+                    ?>
+                </select>
+            </div>
+            <div class="form-element">
+                <input type="submit" class="btn btn-success" name="sort" value="Sort">
+            </div>
+        </form>
+        <br>
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -48,6 +78,9 @@ require_once '../templates/header.php';
                 </tr>
             </thead>
             <tbody>
+        <?php 
+            if(!isset($_GET['category'])){
+                ?>
                <?php
         require_once "../../includes/db_connect.php";
         $sql = "SELECT * FROM products WHERE archived = 0";
@@ -78,6 +111,38 @@ require_once '../templates/header.php';
                 ?>
             </tbody>
         </table>
+        <?php
+            }else{
+                
+                    $category = $_GET['category'];
+                    require_once "../../includes/db_connect.php";
+                    $sql = "SELECT * FROM products WHERE category_id = $category AND archived = 0";
+                    $result = mysqli_query($conn, $sql);
+                    if(mysqli_num_rows($result) > 0){
+                        while($row = mysqli_fetch_assoc($result)){
+                            echo "<tr>";
+                            echo "<td>".$row['id']."</td>";
+                            echo "<td><img src='../../uploads/".$row['image']."' width='100' height='100'></td>";
+                            echo "<td>".$row['name']."</td>";
+                            echo "<td>".$row['price']."</td>";
+                            echo "<td>".$row['cost_price']."</td>";
+                            $categoryId = $row['category_id'];
+                            $fetchCategoryNameSql = "SELECT name FROM categories WHERE id=$categoryId";
+                            $categoryNameRows = mysqli_query($conn, $fetchCategoryNameSql);
+                            $categoryNameRow = mysqli_fetch_assoc($categoryNameRows);
+                            echo "<td>".$categoryNameRow['name']."</td>";
+                            echo "<td>";
+                            echo "<a href='view.php?id=".$row['id']."' class='btn btn-primary mx-1'>Read More</a>";
+                            echo "<a href='edit.php?id=".$row['id']."' class='btn btn-warning mx-1'>Edit</a>";
+                            echo "<a href='delete.php?id=".$row['id']."' class='btn btn-danger mx-1'>Delete</a>";
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                    }else{
+                        echo "<tr><td colspan='6'>No Products were found</td></tr>";
+                    }
+                
+            }?>
         <a href="../logout.php" class="btn btn-warning ">Logout</a>
 
 </div>
@@ -94,3 +159,4 @@ require_once '../templates/header.php';
 </script>
 </body>
 </html>
+
