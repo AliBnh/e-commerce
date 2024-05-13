@@ -12,9 +12,18 @@ if(!isset($_SESSION['user'])){
     <title>Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
+
 <body>
-    <div class="container">
-    <h2>Checkout</h2>
+<div class="container" 
+    style="
+    width: 50%;
+    border: 1px solid #ccc ;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 30px auto;
+    margin-top: 80px;
+
+    ">    <h2>Checkout</h2>
     <form action="" method="post">
         <?php
         include("../includes/db_connect.php");
@@ -23,6 +32,9 @@ if(!isset($_SESSION['user'])){
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_array($result);
         ?>
+
+<div class="row">
+        <div class="col-md-6">
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" name="name" class="form-control" value="<?php echo $row['username']; ?>" required>
@@ -35,6 +47,8 @@ if(!isset($_SESSION['user'])){
             <label for="phone">Phone</label>
             <input type="text" name="phone" class="form-control" value="<?php echo $row['phone_number']; ?>" required>
         </div>
+        </div>
+        <div class="col-md-6">
         <div class="form-group">
             <label for="address">Address</label>
             <input type="text" name="address" class="form-control" value="<?php echo $row['address']; ?>" required>
@@ -46,6 +60,9 @@ if(!isset($_SESSION['user'])){
             <option value="credit_card">Card</option>
         </select>
         </div>
+        </div>
+        <div class="mt-4">
+        <h5>Order Summary</h5>
         <hr/>
         <?php
         $cart = json_decode($_COOKIE['cart'],true);
@@ -63,9 +80,11 @@ if(!isset($_SESSION['user'])){
         echo "<p><strong>Total: ".$total."</strong></p>";
         echo "<input type='hidden' name='total' value='".$total."'>";
         ?>
+        </div>
         <div class="form-group">
             <input type="submit" class="btn btn-primary" name="checkout" value="Checkout">
         </div>
+
     </form>
     </div>
 </body>

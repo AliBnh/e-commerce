@@ -38,10 +38,39 @@ if(isset($_POST['removeProduct'])){
     <title>Cart</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
-<body>
+<style>
+        body{
+        background-color: #f8f9fa;
+    }
+        .icon{
+        width: 16px;
+    }
+    .table{
+        text-align: center;
+        vertical-align: middle; 
+        background-color: white;
+        margin-top: 80px;
+    }
+    h1{
+        margin-left: 60px;
+        margin-top: 30px;
+    }
+    .checkbtn{
+        margin-left: 45%;
+        width: 150px;
+        margin-top: 30px;
+    }
+    .container{
+        width: 60%;
+        margin: 0 auto;
+    }
+    </style>
+    <body>
+        <header class="d-flex justify-content-between ">
+            <h1 class="text-center ">Cart</h1>
+        </header>
     <div class="container">
-        <h2>Cart</h2>
-        <table class="table">
+    <table class="table " style="border-radius: 16px;">
             <thead>
                 <tr>
                     <th>image</th>
@@ -50,7 +79,6 @@ if(isset($_POST['removeProduct'])){
                     <th>Quantity</th>
                     <th>Actions</th>
                     <th>Total</th>
-
                 </tr>
             </thead>
             <tbody>
@@ -73,7 +101,8 @@ if(isset($_POST['removeProduct'])){
                             echo "<td>".$quantity."</td>";
                             echo "<td>".$product['price'] * $quantity."</td>";
                             echo "<td>
-                            <form action='' method='post'>
+                            <div class='d-flex justify-content-center'>
+                            <form action='' method='post' class='d-flex'>
                               <input type='hidden' name='item_id' value='" . $product['id'] . "'>
                               <input type='number' name='quantity' value='" . $quantity . "' min='1' style='width: 30px;'>
                               <button type='submit' name='updateQuantity' class='btn btn-sm btn-primary'>Update</button>
@@ -82,6 +111,7 @@ if(isset($_POST['removeProduct'])){
                               <input type='hidden' name='item_id' value='" . $product['id'] . "'>
                               <button type='submit' name='removeProduct' class='btn btn-sm btn-danger'>Remove</button>
                             </form>
+                            </div>
                           </td>";
                         }    
                     }else {
@@ -96,7 +126,7 @@ if(isset($_POST['removeProduct'])){
                 
             </tbody>
         </table>
-        <a href="checkout.php" class="btn btn-success">Checkout</a>
+        <a href="checkout.php" class="btn btn-success checkbtn ">Checkout</a>
     </div>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <?php
 require_once "./templates/navbar.php";
+ob_start();
 
 ?>
 <!DOCTYPE html>
@@ -15,9 +16,7 @@ require_once "./templates/navbar.php";
 <div class="container">
     <header class="d-flex justify-content-between my-4">
         <h1 class="text-center my-4">Products</h1>
-        <div>
-            <a href="index.php" class="btn btn-primary">Back</a>
-        </div>
+
     </header>
  
     <form action="products.php" method="get">
@@ -160,7 +159,6 @@ require_once "./templates/navbar.php";
                 $price = mysqli_real_escape_string($conn, $_POST['price']);
                 $image = mysqli_real_escape_string($conn, $_POST['image']);
                 $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
-
                 if(isset($_COOKIE['cart'])){
                     $cookie_data = stripslashes($_COOKIE['cart']);
                     $cart_data = json_decode($cookie_data, true);
@@ -187,7 +185,7 @@ require_once "./templates/navbar.php";
                 $item_data = json_encode($cart_data);
                 setcookie('cart', $item_data, time() + (86400 * 30));
             }
-
+            ob_end_flush();
     ?>
     
 </body>

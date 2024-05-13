@@ -7,11 +7,14 @@
     }
     require_once ".././includes/db_connect.php";
     $sql = "SELECT * FROM categories WHERE archived=0";
-    $result = mysqli_query($conn,$sql);
+    $result = mysqli_query($conn, $sql);
     while($category = mysqli_fetch_array($result, MYSQLI_ASSOC)){
         $categories[] = $category;
     }
-    
+    if(isset($_GET['idCategoryNav'])){
+        $id = $_GET['idCategoryNav'];
+        header("Location: products.php?id=$id");
+    }        
 ?>
 <head>
 <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
@@ -27,18 +30,18 @@
             <li class="nav-item active">
                 <a class="nav-link" href="index.php">Home</a>
             </li>
-            <!-- <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    Categories
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li class="nav-item">
+            <form action="" method="get">
+            <select name="idCategoryNav" onchange="this.form.submit()">
+                    <option value="">Categories</option>
                     <?php
-                        // foreach($categories as $category){
-                        //     echo '<a class="dropdown-item" href="products.php?id='.$category['id'].'">'.$category['name'].'</a>';
-                        // }
+                        foreach($categories as $category){
+                            echo '<option value="'.$category['id'].'">'.$category['name'].'</option>';
+                        }
                     ?>
-                </div>
-            </li> -->
+                </select>
+            </form>        
+            </li>
         </ul>
     </div>
     <a href="cart.php" class="nav-link mx-1">

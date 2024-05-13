@@ -12,9 +12,22 @@ require_once "./templates/navbar.php";
 
 </head>
 <body>
+<style>
+    body{
+        background-color: #f8f9fa;
+    }
+    .container{
+        background-color: white;  
+        border-radius: 16px;  
+        padding: 30px;
+        margin: 20px auto;
+        width: 35%;
+        
+    }
+</style>
 <div class="container">
         <header class="d-flex justify-content-between my-4">
-            <h1 class="text-center my-4">Edit Profile</h1>
+            <h1 class="text-center my-2">Edit Profile</h1>
         </header>
         <?php
             include("../includes/db_connect.php");

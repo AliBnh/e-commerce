@@ -1,5 +1,10 @@
 <?php
 require_once "./templates/navbar.php";
+require_once "../includes/db_connect.php";
+$sql = "SELECT * FROM categories where archived = 0";
+$result = mysqli_query($conn, $sql);
+$categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,12 +45,26 @@ require_once "./templates/navbar.php";
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: url(../uploads/bg3.jpg);
+  /* background: url(../uploads/bg3.jpg); */
+  background-color: #f5f5f5;
   background-size: cover;
   background-position: center;
 }
 .banner-text{
     margin-right: 200px;
+}
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+.card{
+    height: 300px;
+    margin: 0 10px;
+}
+.card-img-top{
+    height: 200px;
 }
 </style>
 <body>
@@ -57,31 +76,22 @@ require_once "./templates/navbar.php";
     </div>
 
         </div>
-       
     <div class="products">
-    <h2>Products</h2>
-        <h2>Categories</h2>
+        <h2 style="margin-bottom: 32px;">Our Brands</h2>
         <div class="container">
-        <div class="row">
-            <?php
-                $sql = "SELECT * FROM categories WHERE archived=0";
-                $result = mysqli_query($conn,$sql);
-                while($category = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                    echo "<div class='col-md-3'>";
-                    echo "<a href='products.php?id=".$category['id']."'>";
-                    echo "<div class='card'>";
-                    echo "<div class='card-body'>";
-                    echo "<h5 class='card-title'>".$category['name']."</h5>";
-                    echo "</div>";
-                    echo "</div>";
-                    echo "</a>";
-                    echo "</div>";
-                }
-            ?>
+            <div class="row cards">
+        <?php foreach ($categories as $category) : ?>
+            <div class="card" style="width: 18rem;">
+                <img src="../uploads/<?= $category['image'] ?>" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"><?= $category['name'] ?></h5>
+                    <a href="products.php?id=<?= $category['id'] ?>" class="btn btn-primary">View Products</a>
+                </div>
+            </div>
+        <?php endforeach; ?>
         </div>
     </div>
-
+    </div>
         
-
 </body>
 </html>
