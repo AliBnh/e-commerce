@@ -26,7 +26,7 @@ require_once '../templates/sidebar.php';
         background-color: white;
     }
     .container{
-        margin-top: -140px;   
+        margin-top: -40px;   
     }
     .heading{
         margin-bottom: 60px;
