@@ -11,19 +11,28 @@ require_once '../templates/sidebar.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <style>
         .category-details{
-            border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 5px;
-            background-color: #f5f5f5;
+            text-align: left;
         }
+        body{
+        background-color: #f8f9fa;
+        }
+        .container{
+        background-color: white;    
+    }
     </style>
 </head>
 <body>
-<div class="container">
-        <header class="d-flex justify-content-between my-4">
-            <h1 class="text-center my-4">Category Details</h1>
+<div class="container" 
+    style="
+    width: 90%;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 20px auto;
+    "> 
+<header class="d-flex justify-content-between ">
+            <h1 class="text-center">Category Details</h1>
             <div>
-                <a href="index.php" class="btn btn-primary">Back</a>
+                <a href="index.php" class="btn btn-primary my-4 mx-2">Back</a>
             </div>
         </header>
         <div class="category-details my-4">
@@ -35,7 +44,7 @@ require_once '../templates/sidebar.php';
                     $result = mysqli_query($conn, $sql);
                     if(mysqli_num_rows($result) > 0){
                         while($row = mysqli_fetch_assoc($result)){
-                            echo "<h2>".$row['name']."</h2>";
+                            echo "<h3>".$row['name']."</h3>";
                             echo "<p><strong>Description: </strong>".$row['description']."</p>";
                         }
                     }else{
