@@ -59,8 +59,9 @@ if(isset($_POST['sort'])){
             }
         ?>
         <form action="" method="post">
-            <div class="form-element my-4">
-                <select name="category" class="form-control" style="width: 220px;">
+            <div class="d-flex ">
+            <div class="form-element">
+                <select name="category" class="form-control" style="width: 220px;border-top-right-radius: 0px; border-bottom-right-radius:0px">
                     <option value="0">All Brands</option>
                     <?php
                         require_once "../../includes/db_connect.php";
@@ -73,10 +74,10 @@ if(isset($_POST['sort'])){
                         }
                     ?>
                 </select>
-                
             </div>
             <div class="form-element" style="width: 20px;" >
-                <input type="submit" class="btn btn-success" style="width: 80px;" name="sort" value="Filter">
+                <input type="submit" class="btn btn-success" style="width: 80px; border-top-left-radius: 0px; border-bottom-left-radius:0px" name="sort" value="Filter">
+            </div>
             </div>
         </form>
         <br>

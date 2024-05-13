@@ -54,14 +54,16 @@ require_once '../templates/sidebar.php';
             }
         ?>
         <form action="" method="get">
-        <div class="col-md-3">
-                <select name="sort" class="form-control">
+        <div class="d-flex mb-5 ">
+        <div class="">
+                <select name="sort" class="form-control" style="width: 220px;border-top-right-radius: 0px; border-bottom-right-radius:0px; ">
                     <option value="0">Sort by total</option>
                     <option value="asc">Ascending</option>
                     <option value="desc">Descending</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Sort</button>
+            <button type="submit" class="btn btn-success" style="width: 80px; border-top-left-radius: 0px; border-bottom-left-radius:0px">Sort</button>
+        </div>
         </form>
         <table class="table " style="border-radius: 16px;">
             <thead>
