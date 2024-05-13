@@ -1,5 +1,6 @@
 <?php
 require_once '../templates/header.php';
+require_once '../templates/sidebar.php';
 ?>
 <?php
 if(isset($_POST['sort'])){
@@ -18,7 +19,6 @@ if(isset($_POST['sort'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-
 </head>
 <body>
 <div class="container">
@@ -149,8 +149,6 @@ if(isset($_POST['sort'])){
                     }
                 
             }?>
-        <a href="../logout.php" class="btn btn-warning ">Logout</a>
-
 </div>
 
 
