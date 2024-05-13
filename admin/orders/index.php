@@ -25,15 +25,17 @@ require_once '../templates/sidebar.php';
         vertical-align: middle; 
         background-color: white;
     }
+    .container{
+        margin-top: -140px;   
+    }
+    .heading{
+        margin-bottom: 60px;
+    }
 </style>
 <body>
 <div class="container">
-<header class="d-flex justify-content-between ">
+        <header class="d-flex heading">
             <h1 class="text-center my-4">Orders List</h1>
-            <div>
-                //Not developed yet, Create & Edit order pages
-                <a href="create.php" class="btn btn-primary my-4 mx-2">Place order</a>
-            </div>
         </header>
         <?php
             if(!$_SESSION)

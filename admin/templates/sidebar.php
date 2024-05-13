@@ -127,9 +127,6 @@ body {
 				<a href='../orders/index.php'><i class='fa fa-shopping-cart'></i>   Orders</a>
 			</li>
 			<li>
-				<a href='../orders/index.php'><i class='fa fa-phone'></i>   Order Items</a>
-			</li>
-			<li>
 				<a href='../customers/profile.php'> <i class='fa fa-cog '></i>   Settings</a>
   			</li>			
 
