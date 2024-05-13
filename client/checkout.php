@@ -3,6 +3,8 @@ require_once "./templates/navbar.php";
 if(!isset($_SESSION['user'])){
     header("Location: ./auth/login.php");
 }
+ob_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -103,6 +105,8 @@ if(isset($_POST['checkout'])){
     $sqlUpdateUser = "UPDATE users SET username = '$name', email = '$email', phone_number = '$phone', address = '$address' WHERE id = $user_id";
     mysqli_query($conn, $sqlUpdateUser);
 
+
+
     $sql = "INSERT INTO orders (user_id, total,payment_method) VALUES ('$user_id','$total','$payment_method')";
     mysqli_query($conn, $sql);
     $sqlGetOrderId = "SELECT id FROM orders WHERE user_id = $user_id ORDER BY id DESC LIMIT 1";
@@ -124,6 +128,36 @@ if(isset($_POST['checkout'])){
 
     }
     setcookie('cart', '', time() - 3600);
+    if($_POST['payment_method'] == 'credit_card'){
+        require "../vendor/autoload.php";
+        $stripe_secret_key = "sk_test_51OhG8vCDQGH9qTAvml4xFFTcLfwDqt5IKjqLHKArtniKB37iRpjfJCk8K9KPltHJegFKitfWqhCUnhYZDQ6WIrZk00nNaJLfRo";
+        \Stripe\Stripe::setApiKey($stripe_secret_key);
+        $checkout_session = \Stripe\Checkout\Session::create([
+            "mode" => "payment",
+            "success_url" => "http://localhost/ecommerce/client/orders.php",
+            "cancel_url" => "http://localhost/ecommerce/client/cart.php",
+            "locale" => "auto",
+            "payment_method_types" => ["card"],
+            "line_items" => [
+                [
+                    "quantity" => 1,
+                    "price_data" => [
+                        "currency" => "usd",
+                        "unit_amount" => $total*100,
+                        "product_data" => [
+                            "name" => "Order #".$order_id
+                        ]
+                    ]
+                ]
+            ]
+        ]);
+        http_response_code(303);
+        header("Location: " . $checkout_session->url);
+        exit;
+    }
     header("Location: ./index.php");
 }
+ob_end_flush();
+
+
 ?>

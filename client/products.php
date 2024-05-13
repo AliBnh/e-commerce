@@ -286,13 +286,6 @@ $rams = array_unique($rams);
             }
             ob_end_flush();
     ?>
-<script>
-    function updatePlaceholder(selectElement) {
-        var selectedOption = selectElement.options[selectElement.selectedIndex].text;
-        selectElement.setAttribute('data-placeholder', selectedOption);
-    }
 
-
-</script>
 </body>
 </html>
