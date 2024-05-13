@@ -8,15 +8,20 @@ require_once '../templates/sidebar.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categories</title>
+    <title>Brands</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
+<style>
+    .icon{
+        width: 16px;
+    }
+</style>
 <div class="container">
         <header class="d-flex justify-content-between my-4">
-            <h1 class="text-center my-4">Categories List</h1>
+            <h1 class="text-center my-4">Brands List</h1>
             <div>
-                <a href="create.php" class="btn btn-primary">Add a new Category</a>
+                <a href="create.php" class="btn btn-primary">Add a new Brand</a>
             </div>
         </header>
         <?php
@@ -38,8 +43,7 @@ require_once '../templates/sidebar.php';
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Category</th>
+                    <th>Brand</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -51,12 +55,13 @@ require_once '../templates/sidebar.php';
                     if(mysqli_num_rows($result) > 0){
                         while($row = mysqli_fetch_assoc($result)){
                             echo "<tr>";
-                            echo "<td>".$row['id']."</td>";
                             echo "<td>".$row['name']."</td>";
                             echo "<td>";
-                            echo "<a href='view.php?id=".$row['id']."' class='btn btn-primary mx-1'>Read More</a>";
-                            echo "<a href='edit.php?id=".$row['id']."' class='btn btn-warning mx-1'>Edit</a>";
-                            echo "<a href='delete.php?id=".$row['id']."' class='btn btn-danger mx-1'>Delete</a>";
+                            echo "<div class='btn-group'>";
+                            echo "<a href='view.php?id=".$row['id']."' class='btn btn-primary'><i class='fa fa-info icon'></i></a>";
+                            echo "<a href='edit.php?id=".$row['id']."' class='btn btn-warning'><i class='fa fa-pencil-square-o icon'></i></a>";
+                            echo "<a href='delete.php?id=".$row['id']."' class='btn btn-danger'><i class='fa fa-trash-o icon'></i></a>";
+                            echo "</div>"; 
                             echo "</td>";
                             echo "</tr>";
                         }
@@ -66,7 +71,6 @@ require_once '../templates/sidebar.php';
                 ?>
             </tbody>
         </table>
-        <a href="../logout.php" class="btn btn-warning ">Logout</a>
 
 </div>
 

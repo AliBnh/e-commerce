@@ -19,7 +19,13 @@ if(isset($_POST['sort'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 </head>
+<style>
+    .icon{
+        width: 16px;
+    }
+</style>
 <body>
 <div class="container">
         <header class="d-flex justify-content-between my-4">
@@ -46,8 +52,8 @@ if(isset($_POST['sort'])){
         ?>
         <form action="" method="post">
             <div class="form-element my-4">
-                <select name="category" class="form-control">
-                    <option value="0">All Categories</option>
+                <select name="category" class="form-control" style="width: 220px;">
+                    <option value="0">All Brands</option>
                     <?php
                         require_once "../../includes/db_connect.php";
                         $sql = "SELECT * FROM categories WHERE archived = 0";
@@ -59,17 +65,17 @@ if(isset($_POST['sort'])){
                         }
                     ?>
                 </select>
+                
             </div>
-            <div class="form-element">
-                <input type="submit" class="btn btn-success" name="sort" value="Sort">
+            <div class="form-element" style="width: 20px;" >
+                <input type="submit" class="btn btn-success" style="width: 80px;" name="sort" value="Filter">
             </div>
         </form>
         <br>
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Image</th>
+                    <th>Product</th>
                     <th>Name</th>
                     <th>Selling Price</th>
                     <th>Costing Price</th>
@@ -90,7 +96,6 @@ if(isset($_POST['sort'])){
                     if(mysqli_num_rows($result) > 0){
                         while($row = mysqli_fetch_assoc($result)){
                             echo "<tr>";
-                            echo "<td>".$row['id']."</td>";
                             echo "<td><img src='../../uploads/".$row['image']."' width='100' height='100'></td>";
                             echo "<td>".$row['name']."</td>";
                             echo "<td>".$row['price']."</td>";
@@ -103,9 +108,11 @@ if(isset($_POST['sort'])){
                             $categoryNameRow = mysqli_fetch_assoc($categoryNameRows);
                             echo "<td>".$categoryNameRow['name']."</td>";
                             echo "<td>";
-                            echo "<a href='view.php?id=".$row['id']."' class='btn btn-primary mx-1'>Read More</a>";
-                            echo "<a href='edit.php?id=".$row['id']."' class='btn btn-warning mx-1'>Edit</a>";
-                            echo "<a href='delete.php?id=".$row['id']."' class='btn btn-danger mx-1'>Delete</a>";
+                            echo "<div class='btn-group'>";
+                            echo "<a href='view.php?id=".$row['id']."' class='btn btn-primary'><i class='fa fa-info icon'></i></a>";
+                            echo "<a href='edit.php?id=".$row['id']."' class='btn btn-warning'><i class='fa fa-pencil-square-o icon'></i></a>";
+                            echo "<a href='delete.php?id=".$row['id']."' class='btn btn-danger'><i class='fa fa-trash-o icon'></i></a>";
+                            echo "</div>";     
                             echo "</td>";
                             echo "</tr>";
                         }
@@ -125,7 +132,6 @@ if(isset($_POST['sort'])){
                     if(mysqli_num_rows($result) > 0){
                         while($row = mysqli_fetch_assoc($result)){
                             echo "<tr>";
-                            echo "<td>".$row['id']."</td>";
                             echo "<td><img src='../../uploads/".$row['image']."' width='100' height='100'></td>";
                             echo "<td>".$row['name']."</td>";
                             echo "<td>".$row['price']."</td>";
@@ -138,10 +144,13 @@ if(isset($_POST['sort'])){
                             $categoryNameRow = mysqli_fetch_assoc($categoryNameRows);
                             echo "<td>".$categoryNameRow['name']."</td>";
                             echo "<td>";
-                            echo "<a href='view.php?id=".$row['id']."' class='btn btn-primary mx-1'>Read More</a>";
-                            echo "<a href='edit.php?id=".$row['id']."' class='btn btn-warning mx-1'>Edit</a>";
-                            echo "<a href='delete.php?id=".$row['id']."' class='btn btn-danger mx-1'>Delete</a>";
+                            echo "<div class='btn-group'>";
+                            echo "<a href='view.php?id=".$row['id']."' class='btn btn-primary'><i class='fa fa-info icon'></i></a>";
+                            echo "<a href='edit.php?id=".$row['id']."' class='btn btn-warning'><i class='fa fa-pencil-square-o icon'></i></a>";
+                            echo "<a href='delete.php?id=".$row['id']."' class='btn btn-danger'><i class='fa fa-trash-o icon'></i></a>";
+                            echo "</div>"; 
                             echo "</td>";
+                            
                             echo "</tr>";
                         }
                     }else{

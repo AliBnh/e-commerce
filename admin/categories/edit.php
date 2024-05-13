@@ -43,7 +43,6 @@ require_once '../templates/sidebar.php';
         <?php
             }
         ?>
-        <a href="../logout.php" class="btn btn-warning ">Logout</a>
 
 </div>
 

@@ -42,7 +42,7 @@ body {
 	right: 0px;
 	width: 0%;
 	height: 100%;
-	background: #e3e9f7;
+	background: white;
 	border-radius: 40px 0px 0px 40px;
 	z-index: -1;
 	transition: all 300ms ease-in-out;
@@ -104,7 +104,7 @@ body {
 	<nav>
 		<ul>
 			<li class='logo'>
-				<img src='../../uploads/logo.svg'>
+				<img src='../../uploads/download.svg'>
 				<h2 style='color:white;'>BrandHub</h2>
 			</li>
 			<li>

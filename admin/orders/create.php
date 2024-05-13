@@ -35,7 +35,6 @@ require_once '../templates/sidebar.php';
                 <input type="submit" class="btn btn-success" name="create" value="Add Product">
             </div>
         </form>
-        <a href="../logout.php" class="btn btn-warning ">Logout</a>
 
 </div>
 

@@ -12,7 +12,15 @@ require_once '../templates/sidebar.php';
 
 </head>
 <body>
-<div class="container">
+<div class="container" 
+    style="
+    width: 90%;
+    border: 1px solid #ccc ;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 20px auto;
+
+    ">
         <header class="d-flex justify-content-between my-4">
             <h1 class="text-center my-4">Add new Products</h1>
             <div>
@@ -20,45 +28,50 @@ require_once '../templates/sidebar.php';
             </div>
         </header>
         <form action="process.php" method="post" enctype="multipart/form-data">
-            <div class="form-element my-4">
-                <input type="text" name="name" class="form-control" placeholder="Product Name " required>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-element my-4">
+                    <input type="text" name="name" class="form-control" placeholder="Product Name" required>
+                </div>
+                <div class="form-element my-4">
+                    <input type="text" name="description" class="form-control" placeholder="Description">
+                </div>
+                <div class="form-element my-4">
+                    <input type="number" name="price" class="form-control" placeholder="Selling Price" required>
+                </div>
+                <div class="form-element my-4">
+                    <input type="number" name="cost_price" class="form-control" placeholder="Costing Price" required>
+                </div>
             </div>
-            <div class="form-element my-4">
-                <input type="text" name="description" class="form-control" placeholder="Description ">
-            </div>
-            <div class="form-element my-4">
-                <input type="number" name="price" class="form-control" placeholder="Selling Price " required>
-            </div>
-            <div class="form-element my-4">
-                <input type="number" name="cost_price" class="form-control" placeholder="Costing Price " required>
-            </div>
-            <div class="form-element my-4">
-                <input type="number" name="ram" class="form-control" placeholder="Ram " required>
-            </div>
-            <div class="form-element my-4">
-                <input type="number" name="storage" class="form-control" placeholder="Storage " required>
-            </div>
-            <select name="categoryId" class="form-element my-4" required>
-                <?php
-                    require_once "../../includes/db_connect.php";
-                    $sql = "SELECT * FROM categories WHERE archived = 0";
-                    $result = mysqli_query($conn, $sql);
-                    echo "<option value=''>Select Category</option>";
-                    if(mysqli_num_rows($result) > 0){
-                        while($row = mysqli_fetch_assoc($result)){
-                            echo "<option value='".$row['id']."'>".$row['name']."</option>";
+            <div class="col-md-6">
+                <div class="form-element my-4">
+                    <input type="number" name="ram" class="form-control" placeholder="RAM" required>
+                </div>
+                <div class="form-element my-4">
+                    <input type="number" name="storage" class="form-control" placeholder="Storage" required>
+                </div>
+                <select name="categoryId" class="form-control my-4" required>
+                    <?php
+                        require_once "../../includes/db_connect.php";
+                        $sql = "SELECT * FROM categories WHERE archived = 0";
+                        $result = mysqli_query($conn, $sql);
+                        echo "<option value=''>Select Category</option>";
+                        if(mysqli_num_rows($result) > 0){
+                            while($row = mysqli_fetch_assoc($result)){
+                                echo "<option value='".$row['id']."'>".$row['name']."</option>";
+                            }
                         }
-                    }
-                ?>
-            </select>
-            <div class="form-element my-4">
-                <input type="file" name="image" class="form-control" required>
+                    ?>
+                </select>
+                <div class="form-element my-4">
+                    <input type="file" name="image" class="form-control" required>
+                </div>
             </div>
-            <div class="form-element">
-                <input type="submit" class="btn btn-success" name="create" value="Add Product">
-            </div>
-        </form>
-        <a href="../logout.php" class="btn btn-warning ">Logout</a>
+        </div>
+        <div class="form-element">
+            <input type="submit" class="btn btn-success" name="create" value="Add Product">
+        </div>
+    </form>
 
 </div>
 

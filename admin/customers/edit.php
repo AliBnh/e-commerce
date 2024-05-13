@@ -12,8 +12,14 @@ require_once '../templates/sidebar.php';
 
 </head>
 <body>
-<div class="container">
-        <header class="d-flex justify-content-between my-4">
+<div class="container" 
+    style="
+    width: 90%;
+    border: 1px solid #ccc ;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 20px auto;
+    ">         <header class="d-flex justify-content-between my-4">
             <h1 class="text-center my-4">Edit Customer</h1>
             <div>
                 <a href="index.php" class="btn btn-primary">Back to home</a>
@@ -28,29 +34,32 @@ require_once '../templates/sidebar.php';
                 $row = mysqli_fetch_array($result);
         ?> 
         <form action="process.php" method="post">
-
-            <div class="form-element my-4">
-                <input type="text" name="username" class="form-control" placeholder="Username "  value="<?php echo $row["username"];?>" required>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-element my-4">
+                    <input type="text" name="username" class="form-control" placeholder="Username" value="<?php echo $row["username"];?>" required>
+                </div>
+                <div class="form-element my-4">
+                    <input type="email" name="email" value="<?php echo $row["email"];?>" class="form-control" placeholder="Email" required>
+                </div>
             </div>
-            <div class="form-element my-4">
-                <input type="email" name="email" value="<?php echo $row["email"];?>" class="form-control" placeholder="Email " required>
+            <div class="col-md-6">
+                <div class="form-element my-4">
+                    <input type="text" name="address" class="form-control" placeholder="Address" value="<?php echo $row["address"];?>">
+                </div>
+                <div class="form-element my-4">
+                    <input type="text" name="phone_number" class="form-control" placeholder="Phone Number" value="<?php echo $row["phone_number"];?>">
+                </div>
             </div>
-            <div class="form-element my-4">
-                <input type="text" name="address" class="form-control" placeholder="Address "  value="<?php echo $row["address"];?>" >
-            </div>
-            <div class="form-element my-4">
-                <input type="text" name="phone_number" class="form-control" placeholder="Phone Number "  value="<?php echo $row["phone_number"];?>" >
-            </div>
-
-            <input type="hidden" name="id" value="<?php echo $_GET['id'];?>">
-            <div class="form-element">
-                <input type="submit" class="btn btn-success" name="edit" value="Save">
-            </div>
-        </form>
+        </div>
+        <input type="hidden" name="id" value="<?php echo $_GET['id'];?>">
+        <div class="form-element" >
+            <input type="submit" class="btn btn-success" name="edit" value="Save">
+        </div>
+    </form>
         <?php
             }
         ?>
-        <a href="../logout.php" class="btn btn-warning ">Logout</a>
 
 </div>
 
