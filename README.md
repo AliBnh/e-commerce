@@ -1,5 +1,5 @@
 # E-commerce App Requirements
-
+Stripe link : https://dashboard.stripe.com/test/payments
 ## 1. Functionalities
 
 ### Admin & Client
