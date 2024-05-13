@@ -96,7 +96,8 @@ body {
 	font-size: 16px;
   }
   .logout:hover {
-	background-color: #2b2626;
+	background-color: white;
+	color: #262626;
   }
   .logout:active {
 	background-color: #262626;

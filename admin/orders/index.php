@@ -3,7 +3,6 @@ require_once '../templates/header.php';
 require_once '../templates/sidebar.php';
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +10,6 @@ require_once '../templates/sidebar.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orders</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-
 </head>
 <style>
     body{
@@ -25,11 +23,13 @@ require_once '../templates/sidebar.php';
         vertical-align: middle; 
         background-color: white;
     }
-    .container{
-        margin-top: -40px;   
-    }
     .heading{
-        margin-bottom: 60px;
+        margin: 30px;
+    }
+    .selectBox{
+        width: 100px;
+        margin:0 auto;
+        text-align: center;
     }
 </style>
 <body>
@@ -53,26 +53,25 @@ require_once '../templates/sidebar.php';
                 unset($_SESSION['update']);
             }
         ?>
-        <div class="d-flex mb-5 justify-content-evenly">
-
-        <form action="" method="get">
-             <div class="d-flex ">
-                <input type="number" name="searchId" class="form-control" style="width: 220px;border-top-right-radius: 0px; border-bottom-right-radius:0px; " placeholder="Order ID">
-                <button type="submit" class="btn btn-primary" style="width: 80px; border-top-left-radius: 0px; border-bottom-left-radius:0px">Search</button>
-            </div>
-        </form>
-        <form action="" method="get">
-        <div class="d-flex">
-        <div class="">
-                <select name="sort" class="form-control" style="width: 220px;border-top-right-radius: 0px; border-bottom-right-radius:0px; ">
-                    <option value="0">Sort by total</option>
-                    <option value="asc">Ascending</option>
-                    <option value="desc">Descending</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-success" style="width: 80px; border-top-left-radius: 0px; border-bottom-left-radius:0px">Sort</button>
-        </div>
-        </form>
+        <div class="d-flex mb-5 justify-content-around">
+            <form action="" method="get">
+                 <div class="d-flex ">
+                    <input type="number" name="searchId" class="form-control" style="width: 220px;border-top-right-radius: 0px; border-bottom-right-radius:0px; " placeholder="Order ID">
+                    <button type="submit" class="btn btn-primary" style="width: 80px; border-top-left-radius: 0px; border-bottom-left-radius:0px">Search</button>
+                </div>
+            </form>
+            <form action="" method="get">
+                <div class="d-flex">
+                    <div class="">
+                        <select name="sort" class="form-control" style="width: 220px;border-top-right-radius: 0px; border-bottom-right-radius:0px; ">
+                            <option value="0">Sort by total</option>
+                            <option value="asc">Ascending</option>
+                            <option value="desc">Descending</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success" style="width: 80px; border-top-left-radius: 0px; border-bottom-left-radius:0px">Sort</button>
+                </div>
+            </form>
         </div>
 
         <table class="table " style="border-radius: 16px;">
@@ -82,101 +81,72 @@ require_once '../templates/sidebar.php';
                     <th>Order date</th>
                     <th>Payment method</th>
                     <th>Status</th>
-                    <th>total</th>
+                    <th>Total</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
             <?php
             require_once "../../includes/db_connect.php";
-            if(isset($_GET['sort']) ){
+            
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['order_id'])) {
+                $orderId = $_POST['order_id'];
+                $newStatus = $_POST['status'];
+                $updateSql = "UPDATE orders SET status='$newStatus' WHERE id=$orderId";
+                mysqli_query($conn, $updateSql);
+                echo "<div class='alert alert-success'>Order status updated successfully.</div>";
+            }
+
+            if(isset($_GET['sort'])) {
                 $sort = $_GET['sort'];
                 if($sort == 'asc'){
                     $sql = "SELECT * FROM orders ORDER BY total ASC";
-                }else if($sort == 'desc'){
+                } else if($sort == 'desc'){
                     $sql = "SELECT * FROM orders ORDER BY total DESC";
-                }
-                if($sort == 0){
+                } else {
                     $sql = "SELECT * FROM orders";
                 }
-                $result = mysqli_query($conn, $sql);
-                if(mysqli_num_rows($result) > 0){
-                    while($row = mysqli_fetch_assoc($result)){
-                        echo "<tr>";
-                        echo "<td>".$row['id']."</td>";
-                        echo "<td>".$row['created_at']."</td>";
-                        echo "<td>".$row['payment_method']."</td>";
-                        echo "<td>".$row['status']."</td>";
-                        echo "<td>".$row['total']."</td>";
-                        echo "<td>";
-                        echo "<div class='btn-group'>";
-                        echo "<a href='view.php?id=".$row['id']."' class='btn btn-primary'><i class='fa fa-info icon'></i></a>";
-                        echo "<a href='edit.php?id=".$row['id']."' class='btn btn-warning'><i class='fa fa-pencil-square-o icon'></i></a>";
-                        echo "<a href='delete.php?id=".$row['id']."' class='btn btn-danger'><i class='fa fa-trash-o icon'></i></a>";
-                        echo "</div>"; 
-                        echo "</td>";
-                        echo "</tr>";
-                    }
-                
-                }else{
-                    echo "<tr><td colspan='6'>No Orders were found</td></tr>";
+            } elseif(isset($_GET['searchId']) && $_GET['searchId'] != '') {
+                $id = $_GET['searchId'];
+                $sql = "SELECT * FROM orders WHERE id=$id";
+            } else {
+                $sql = "SELECT * FROM orders";
+            }
+
+            $result = mysqli_query($conn, $sql);
+            if(mysqli_num_rows($result) > 0) {
+                while($row = mysqli_fetch_assoc($result)){
+                    echo "<tr>";
+                    echo "<td>".$row['id']."</td>";
+                    echo "<td>".$row['created_at']."</td>";
+                    echo "<td>".$row['payment_method']."</td>";
+                    echo "<td>
+                            <form action='' method='post' class='selectBox'>
+                                <input type='hidden' name='order_id' value='".$row['id']."'>
+                                <select name='status' class='form-control' onchange='this.form.submit()'>
+                                    <option value='pending' ".($row['status'] == 'pending' ? 'selected' : '').">Pending</option>
+                                    <option value='processing' ".($row['status'] == 'processing' ? 'selected' : '').">Processing</option>
+                                    <option value='shipped' ".($row['status'] == 'shipped' ? 'selected' : '').">Shipped</option>
+                                    <option value='cancelled' ".($row['status'] == 'cancelled' ? 'selected' : '').">Cancelled</option>
+                                </select>
+                            </form>
+                        </td>";
+                    echo "<td>".$row['total']."</td>";
+                    echo "<td>
+                            <div class='btn-group'>
+                                <a href='view.php?id=".$row['id']."' class='btn btn-primary'><i class='fa fa-info icon'></i></a>
+                                <a href='delete.php?id=".$row['id']."' class='btn btn-danger'><i class='fa fa-trash-o icon'></i></a>
+                            </div>
+                          </td>";
+                    echo "</tr>";
                 }
-            }elseif(isset($_GET['searchId']) && $_GET['searchId'] != ''){
-                    $id = $_GET['searchId'];
-                    $sql = "SELECT * FROM orders WHERE id=$id";
-                    $result = mysqli_query($conn, $sql);
-                    if(mysqli_num_rows($result) > 0){
-                        while($row = mysqli_fetch_assoc($result)){
-                            echo "<tr>";
-                            echo "<td>".$row['id']."</td>";
-                            echo "<td>".$row['created_at']."</td>";
-                            echo "<td>".$row['payment_method']."</td>";
-                            echo "<td>".$row['status']."</td>";
-                            echo "<td>".$row['total']."</td>";
-                            echo "<td>";
-                            echo "<div class='btn-group'>";
-                            echo "<a href='view.php?id=".$row['id']."' class='btn btn-primary'><i class='fa fa-info
-                            icon'></i></a>";
-                            echo "<a href='edit.php?id=".$row['id']."' class='btn btn-warning'><i class='fa fa-pencil-square-o icon'></i></a>";
-                            echo "<a href='delete.php?id=".$row['id']."' class='btn btn-danger'><i class='fa fa-trash-o icon'></i></a>";
-                            echo "</div>";
-                            echo "</td>";
-                            echo "</tr>";
-                        }
-                    }else{
-                        echo "<tr><td colspan='6'>No Orders were found</td></tr>";
-                    }
-                }
-            else{
-            $sql = "SELECT * FROM orders";
-                    $result = mysqli_query($conn, $sql);
-                    if(mysqli_num_rows($result) > 0){
-                        while($row = mysqli_fetch_assoc($result)){
-                            echo "<tr>";
-                            echo "<td>".$row['id']."</td>";
-                            echo "<td>".$row['created_at']."</td>";
-                            echo "<td>".$row['payment_method']."</td>";
-                            echo "<td>".$row['status']."</td>";
-                            echo "<td>".$row['total']."</td>";
-                            echo "<td>";
-                            echo "<div class='btn-group'>";
-                            echo "<a href='view.php?id=".$row['id']."' class='btn btn-primary'><i class='fa fa-info icon'></i></a>";
-                            echo "<a href='edit.php?id=".$row['id']."' class='btn btn-warning'><i class='fa fa-pencil-square-o icon'></i></a>";
-                            echo "<a href='delete.php?id=".$row['id']."' class='btn btn-danger'><i class='fa fa-trash-o icon'></i></a>";
-                            echo "</div>"; 
-                            echo "</td>";
-                            echo "</tr>";
-                        }
-                    }else{
-                        echo "<tr><td colspan='6'>No Orders were found</td></tr>";
-                    }
-                }
-                ?>
+            } else {
+                echo "<tr><td colspan='6'>No Orders were found</td></tr>";
+            }
+            ?>
             </tbody>
         </table>
-
 </div>
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script>
