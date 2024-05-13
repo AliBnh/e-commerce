@@ -48,6 +48,12 @@ require_once '../templates/sidebar.php';
                 unset($_SESSION['update']);
             }
         ?>
+        <form action="" method="get">
+             <div class="d-flex ">
+                <input type="text" name="searchTerm" class="form-control" style="width: 220px;border-top-right-radius: 0px; border-bottom-right-radius:0px; " placeholder="search term">
+                <button type="submit" class="btn btn-primary" style="width: 80px; border-top-left-radius: 0px; border-bottom-left-radius:0px">Search</button>
+            </div>
+        </form>
         <table class="table " style="border-radius: 16px;">
             <thead>
                 <tr>
@@ -60,8 +66,35 @@ require_once '../templates/sidebar.php';
             </thead>
             <tbody>
                <?php
-        require_once "../../includes/db_connect.php";
-        $sql = "SELECT * FROM users WHERE is_admin=0 AND archived=0";
+            require_once "../../includes/db_connect.php";
+
+               if(isset($_GET['searchTerm']) && !empty($_GET['searchTerm'])){
+                   $searchTerm = $_GET['searchTerm'];
+                   $sql = "SELECT * FROM users WHERE is_admin=0 AND archived=0 AND (username LIKE '%$searchTerm%' OR email LIKE '%$searchTerm%' OR address LIKE '%$searchTerm%' OR phone_number LIKE '%$searchTerm%')";
+                   $result = mysqli_query($conn, $sql);
+                   if(mysqli_num_rows($result) > 0){
+                       while($row = mysqli_fetch_assoc($result)){
+                           echo "<tr>";
+                           echo "<td>".$row['username']."</td>";
+                           echo "<td>".$row['email']."</td>";
+                           echo "<td>".$row['address']."</td>";
+                           echo "<td>".$row['phone_number']."</td>";
+                           echo "<td>";
+                           echo "<div class='btn-group'>";
+                           echo "<a href='view.php?id=".$row['id']."' class='btn btn-primary'><i class='fa fa-info icon'></i></a>";
+                            echo "<a href='edit.php?id=".$row['id']."' class='btn btn-warning'><i class='fa fa-pencil-square-o icon'></i></a>";
+                            echo "<a href='delete.php?id=".$row['id']."' class='btn btn-danger'><i class='fa fa-trash-o icon'></i></a>";
+                            echo "</div>";
+                            echo "</td>";
+                            echo "</tr>";
+                        }}else{
+                            echo "<tr><td colspan='6'>No Customers were found</td></tr>";
+                        }
+                    
+
+
+               }else{
+                $sql = "SELECT * FROM users WHERE is_admin=0 AND archived=0";
                     $result = mysqli_query($conn, $sql);
                     if(mysqli_num_rows($result) > 0){
                         while($row = mysqli_fetch_assoc($result)){
@@ -82,6 +115,7 @@ require_once '../templates/sidebar.php';
                     }else{
                         echo "<tr><td colspan='6'>No Customers were found</td></tr>";
                     }
+                }
                 ?>
             </tbody>
         </table>

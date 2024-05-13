@@ -53,8 +53,16 @@ require_once '../templates/sidebar.php';
                 unset($_SESSION['update']);
             }
         ?>
+        <div class="d-flex mb-5 justify-content-evenly">
+
         <form action="" method="get">
-        <div class="d-flex mb-5 ">
+             <div class="d-flex ">
+                <input type="number" name="searchId" class="form-control" style="width: 220px;border-top-right-radius: 0px; border-bottom-right-radius:0px; " placeholder="Order ID">
+                <button type="submit" class="btn btn-primary" style="width: 80px; border-top-left-radius: 0px; border-bottom-left-radius:0px">Search</button>
+            </div>
+        </form>
+        <form action="" method="get">
+        <div class="d-flex">
         <div class="">
                 <select name="sort" class="form-control" style="width: 220px;border-top-right-radius: 0px; border-bottom-right-radius:0px; ">
                     <option value="0">Sort by total</option>
@@ -65,6 +73,8 @@ require_once '../templates/sidebar.php';
             <button type="submit" class="btn btn-success" style="width: 80px; border-top-left-radius: 0px; border-bottom-left-radius:0px">Sort</button>
         </div>
         </form>
+        </div>
+
         <table class="table " style="border-radius: 16px;">
             <thead>
                 <tr>
@@ -79,7 +89,7 @@ require_once '../templates/sidebar.php';
             <tbody>
             <?php
             require_once "../../includes/db_connect.php";
-            if(isset($_GET['sort'])){
+            if(isset($_GET['sort']) ){
                 $sort = $_GET['sort'];
                 if($sort == 'asc'){
                     $sql = "SELECT * FROM orders ORDER BY total ASC";
@@ -111,7 +121,33 @@ require_once '../templates/sidebar.php';
                 }else{
                     echo "<tr><td colspan='6'>No Orders were found</td></tr>";
                 }
-            }else{
+            }elseif(isset($_GET['searchId']) && $_GET['searchId'] != ''){
+                    $id = $_GET['searchId'];
+                    $sql = "SELECT * FROM orders WHERE id=$id";
+                    $result = mysqli_query($conn, $sql);
+                    if(mysqli_num_rows($result) > 0){
+                        while($row = mysqli_fetch_assoc($result)){
+                            echo "<tr>";
+                            echo "<td>".$row['id']."</td>";
+                            echo "<td>".$row['created_at']."</td>";
+                            echo "<td>".$row['payment_method']."</td>";
+                            echo "<td>".$row['status']."</td>";
+                            echo "<td>".$row['total']."</td>";
+                            echo "<td>";
+                            echo "<div class='btn-group'>";
+                            echo "<a href='view.php?id=".$row['id']."' class='btn btn-primary'><i class='fa fa-info
+                            icon'></i></a>";
+                            echo "<a href='edit.php?id=".$row['id']."' class='btn btn-warning'><i class='fa fa-pencil-square-o icon'></i></a>";
+                            echo "<a href='delete.php?id=".$row['id']."' class='btn btn-danger'><i class='fa fa-trash-o icon'></i></a>";
+                            echo "</div>";
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                    }else{
+                        echo "<tr><td colspan='6'>No Orders were found</td></tr>";
+                    }
+                }
+            else{
             $sql = "SELECT * FROM orders";
                     $result = mysqli_query($conn, $sql);
                     if(mysqli_num_rows($result) > 0){

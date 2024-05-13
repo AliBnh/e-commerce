@@ -22,17 +22,25 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
+<style>
+#idCategoryNav{
+        width:100%;
+        border: 0px solid gainsboro;
+        margin-top: 9px;
+        background-color: transparent;
+}
+</style>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand mx-5" href="index.php">BrandHub</a>
 
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="index.php">Home</a>
+            <li class="nav-item">
+                <a class="nav-link" href="index.php"  style="color:black;">Home</a>
             </li>
             <li class="nav-item">
             <form action="" method="get">
-            <select name="idCategoryNav" onchange="this.form.submit()">
+            <select name="idCategoryNav" onchange="this.form.submit()" id='idCategoryNav'>
                     <option value="">Categories</option>
                     <?php
                         foreach($categories as $category){

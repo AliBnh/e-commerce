@@ -58,6 +58,7 @@ if(isset($_POST['sort'])){
                 unset($_SESSION['update']);
             }
         ?>
+        <div class="d-flex mb-2 justify-content-evenly">
         <form action="" method="post">
             <div class="d-flex ">
             <div class="form-element">
@@ -80,6 +81,13 @@ if(isset($_POST['sort'])){
             </div>
             </div>
         </form>
+        <form action="" method="get">
+             <div class="d-flex ">
+                <input type="text" name="searchTerm" class="form-control" style="width: 220px;border-top-right-radius: 0px; border-bottom-right-radius:0px; " placeholder="search term">
+                <button type="submit" class="btn btn-primary" style="width: 80px; border-top-left-radius: 0px; border-bottom-left-radius:0px">Search</button>
+            </div>
+        </form>
+        </div>
         <br>
         <table class="table " style="border-radius: 16px;">
             <thead>
@@ -96,7 +104,38 @@ if(isset($_POST['sort'])){
             </thead>
             <tbody>
         <?php 
-            if(!isset($_GET['category'])){
+            if(isset($_GET['searchTerm'])) {
+                $searchTerm = $_GET['searchTerm'];
+                require_once "../../includes/db_connect.php";
+                $sql = "SELECT * FROM products WHERE archived = 0 AND name LIKE '%$searchTerm%'";
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result) > 0){
+                    while($row = mysqli_fetch_assoc($result)){
+                        echo "<tr>";
+                        echo "<td><img src='../../uploads/".$row['image']."' width='100' height='100'></td>";
+                        echo "<td>".$row['name']."</td>";
+                        echo "<td>".$row['price']."</td>";
+                        echo "<td>".$row['cost_price']."</td>";
+                        echo "<td>".$row['ram']."</td>";
+                        echo "<td>".$row['storage']."</td>";
+                        $categoryId = $row['category_id'];
+                        $fetchCategoryNameSql = "SELECT name FROM categories WHERE id=$categoryId";
+                        $categoryNameRows = mysqli_query($conn, $fetchCategoryNameSql);
+                        $categoryNameRow = mysqli_fetch_assoc($categoryNameRows);
+                        echo "<td>".$categoryNameRow['name']."</td>";
+                        echo "<td>";
+                        echo "<div class='btn-group'>";
+                        echo "<a href='view.php?id=".$row['id']."' class='btn btn-primary'><i class='fa fa-info icon'></i></a>";
+                        echo "<a href='edit.php?id=".$row['id']."' class='btn btn-warning'><i class='fa fa-pencil-square-o icon'></i></a>";
+                        echo "<a href='delete.php?id=".$row['id']."' class='btn btn-danger'><i class='fa fa-trash-o icon'></i></a>";
+                        echo "</div>";     
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='8'>No Products were found</td></tr>";
+                }
+            } elseif (!isset($_GET['category'])) {
                 ?>
                <?php
         require_once "../../includes/db_connect.php";
@@ -126,14 +165,13 @@ if(isset($_POST['sort'])){
                             echo "</tr>";
                         }
                     }else{
-                        echo "<tr><td colspan='6'>No Products were found</td></tr>";
+                        echo "<tr><td colspan='8'>No Products were found</td></tr>";
                     }
                 ?>
             </tbody>
         </table>
         <?php
             }else{
-                
                     $category = $_GET['category'];
                     require_once "../../includes/db_connect.php";
                     $sql = "SELECT * FROM products WHERE category_id = $category AND archived = 0";
@@ -163,9 +201,8 @@ if(isset($_POST['sort'])){
                             echo "</tr>";
                         }
                     }else{
-                        echo "<tr><td colspan='6'>No Products were found</td></tr>";
-                    }
-                
+                        echo "<tr><td colspan='8'>No Products were found</td></tr>";
+                    }            
             }?>
 </div>
 
@@ -181,4 +218,3 @@ if(isset($_POST['sort'])){
 </script>
 </body>
 </html>
-
