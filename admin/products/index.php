@@ -73,7 +73,9 @@ if(isset($_POST['sort'])){
                     <th>Name</th>
                     <th>Selling Price</th>
                     <th>Costing Price</th>
-                    <th>Category</th>
+                    <th>Ram</th>
+                    <th>Storage</th>
+                    <th>Brand</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -93,6 +95,8 @@ if(isset($_POST['sort'])){
                             echo "<td>".$row['name']."</td>";
                             echo "<td>".$row['price']."</td>";
                             echo "<td>".$row['cost_price']."</td>";
+                            echo "<td>".$row['ram']."</td>";
+                            echo "<td>".$row['storage']."</td>";
                             $categoryId = $row['category_id'];
                             $fetchCategoryNameSql = "SELECT name FROM categories WHERE id=$categoryId";
                             $categoryNameRows = mysqli_query($conn, $fetchCategoryNameSql);
@@ -126,6 +130,8 @@ if(isset($_POST['sort'])){
                             echo "<td>".$row['name']."</td>";
                             echo "<td>".$row['price']."</td>";
                             echo "<td>".$row['cost_price']."</td>";
+                            echo "<td>".$row['ram']."</td>";
+                            echo "<td>".$row['storage']."</td>";
                             $categoryId = $row['category_id'];
                             $fetchCategoryNameSql = "SELECT name FROM categories WHERE id=$categoryId";
                             $categoryNameRows = mysqli_query($conn, $fetchCategoryNameSql);

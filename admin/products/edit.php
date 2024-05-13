@@ -28,19 +28,31 @@ require_once '../templates/header.php';
                 $image =  $row['image'];
         ?> 
         <form action="process.php" method="post" enctype="multipart/form-data">
-
+            <label for="name">Product Name</label>
             <div class="form-element my-4">
                 <input type="text" name="name" class="form-control" placeholder="Product Name "  value="<?php echo $row["name"];?>" required>
             </div>
+            <label for="description">Product Description</label>
             <div class="form-element my-4">
                 <input type="text" name="description" value="<?php echo $row["description"];?>" class="form-control" placeholder="Product Description ">
             </div>
+             <label for="ram">Ram</label>
+            <div class="form-element my-4">
+                <input type="number" name="ram" value="<?php echo $row["ram"];?>" class="form-control" placeholder="Ram " required>
+            </div>
+            <label for="storage">Storage</label>
+            <div class="form-element my-4">
+                <input type="number" name="storage" value="<?php echo $row["storage"];?>" class="form-control" placeholder="Storage " required>
+            </div>
+            <label for="price">Selling Price</label>
             <div class="form-element my-4">
                 <input type="number" name="price" value="<?php echo $row["price"];?>" class="form-control" placeholder="Selling Price " required>
             </div>
+            <label for="cost_price">Costing Price</label>
             <div class="form-element my-4">
                 <input type="number" name="cost_price" value="<?php echo $row["cost_price"];?>" class="form-control" placeholder="Costing Price " required>
             </div>
+            <label for="category">Category</label>
             <select name="categoryId"  class="form-element my-4" required>
                 <?php
                     require_once "../../includes/db_connect.php";

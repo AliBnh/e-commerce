@@ -32,6 +32,12 @@ require_once '../templates/header.php';
             <div class="form-element my-4">
                 <input type="number" name="cost_price" class="form-control" placeholder="Costing Price " required>
             </div>
+            <div class="form-element my-4">
+                <input type="number" name="ram" class="form-control" placeholder="Ram " required>
+            </div>
+            <div class="form-element my-4">
+                <input type="number" name="storage" class="form-control" placeholder="Storage " required>
+            </div>
             <select name="categoryId" class="form-element my-4" required>
                 <?php
                     require_once "../../includes/db_connect.php";

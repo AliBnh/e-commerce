@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2024 at 01:20 PM
+-- Generation Time: May 13, 2024 at 07:16 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -34,16 +34,6 @@ CREATE TABLE `categories` (
   `archived` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `categories`
---
-
-INSERT INTO `categories` (`id`, `name`, `description`, `archived`) VALUES
-(17, 'Smartphones', 'jadzifnaozifn', 0),
-(18, 'Cameras', '', 0),
-(19, 'Laptops', '', 0),
-(27, 'Quyn Webster', '', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -59,16 +49,6 @@ CREATE TABLE `orders` (
   `total` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `user_id`, `payment_method`, `status`, `created_at`, `total`) VALUES
-(11, 5, 'cash_on_delivery', 'pending', '2024-04-18 10:11:59', 2000.00),
-(12, 5, 'cash_on_delivery', 'completed', '2024-04-18 10:46:15', 1400.00),
-(13, 5, 'cash_on_delivery', 'pending', '2024-04-18 10:52:50', 522.00),
-(14, 5, 'cash_on_delivery', 'completed', '2024-04-18 14:33:42', 4700.00);
-
 -- --------------------------------------------------------
 
 --
@@ -83,18 +63,6 @@ CREATE TABLE `order_items` (
   `total` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `order_items`
---
-
-INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `total`) VALUES
-(13, 11, 20, 2, 1300.00),
-(14, 11, 21, 1, 700.00),
-(15, 12, 21, 2, 1400.00),
-(16, 13, 30, 1, 522.00),
-(17, 14, 18, 3, 2700.00),
-(18, 14, 19, 2, 2000.00);
-
 -- --------------------------------------------------------
 
 --
@@ -105,6 +73,8 @@ CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` text DEFAULT NULL,
+  `ram` int(11) DEFAULT NULL,
+  `storage` int(11) DEFAULT NULL,
   `price` decimal(10,2) NOT NULL,
   `cost_price` int(11) DEFAULT NULL,
   `stock` int(11) DEFAULT NULL,
@@ -112,19 +82,6 @@ CREATE TABLE `products` (
   `category_id` int(11) NOT NULL,
   `archived` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `cost_price`, `stock`, `image`, `category_id`, `archived`) VALUES
-(18, 'Iphone X', 'This is a ', 900.00, 700, NULL, 'iphoneX.jpg', 17, 0),
-(19, 'Iphone 11', 'This is a ', 1000.00, 800, NULL, 'iphone11.jpg', 17, 0),
-(20, 'Nikon', 'This is a ', 650.00, 600, NULL, 'Nikon.jpg', 18, 0),
-(21, 'Canon', 'This is a ', 700.00, 650, NULL, 'Canon.jpg', 18, 0),
-(22, 'Mac Air M1', 'This is a ', 1200.00, 1003, NULL, 'macAirM1.jpg', 19, 0),
-(23, 'Mac Pro M3', 'Molestiae velit repr', 2100.00, 2000, NULL, 'MacProM3.jpg', 19, 0),
-(30, 'Judith Wilson', 'Soluta iste et venia', 522.00, 500, NULL, 'download.jpg', 27, 1);
 
 -- --------------------------------------------------------
 
@@ -221,7 +178,7 @@ ALTER TABLE `order_items`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `users`
