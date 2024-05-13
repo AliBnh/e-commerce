@@ -63,6 +63,7 @@ require_once '../templates/sidebar.php';
             <thead>
                 <tr>
                     <th>Brand</th>
+                    <th>Name</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -74,8 +75,9 @@ require_once '../templates/sidebar.php';
                 if(mysqli_num_rows($result) > 0){
                     while($row = mysqli_fetch_assoc($result)){
                         echo "<tr>";
+                        echo "<td><img src='../../uploads/".$row['image']."' width='100' height='100'></td>";
                         echo "<td>".$row['name']."</td>";
-                        echo "<td class='action-column'>"; // Added class for action column
+                        echo "<td class='action-column'>"; 
                         echo "<div class='btn-group'>";
                         echo "<a href='view.php?id=".$row['id']."' class='btn btn-primary'><i class='fa fa-info icon'></i></a>";
                         echo "<a href='edit.php?id=".$row['id']."' class='btn btn-warning'><i class='fa fa-pencil-square-o icon'></i></a>";

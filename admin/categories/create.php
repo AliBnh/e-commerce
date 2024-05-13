@@ -25,14 +25,16 @@ require_once '../templates/sidebar.php';
                 <a href="index.php" class="btn btn-primary">Back to home</a>
             </div>
         </header>
-        <form action="process.php" method="post">
+        <form action="process.php" method="post" enctype="multipart/form-data">
             <div class="form-element my-4">
                 <input type="text" name="name" class="form-control" placeholder="Category Name " required>
             </div>
             <div class="form-element my-4">
-                <input type="text" name="categoryDescription" class="form-control" placeholder="Category Description ">
+                <input type="text" name="categoryDescription" class="form-control" placeholder="Category Description " required>
             </div>
-
+            <div class="form-element my-4">
+                <input type="file" name="image" class="form-control" required>
+            </div>
             <div class="form-element">
                 <input type="submit" class="btn btn-success" name="create" value="Add Category">
             </div>

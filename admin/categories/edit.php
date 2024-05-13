@@ -40,12 +40,22 @@ require_once '../templates/sidebar.php';
                 $result = mysqli_query($conn, $sql);
                 $row = mysqli_fetch_array($result);
         ?> 
-        <form action="process.php" method="post">
+        <form action="process.php" method="post" enctype="multipart/form-data">
             <div class="form-element my-4">
                 <input type="text" name="name" class="form-control" placeholder="Category Name " value="<?php echo $row["name"];?>" required>
             </div>
             <div class="form-element my-4">
                 <input type="text" value="<?php echo $row["description"];?>" name="categoryDescription" class="form-control" placeholder="Category Description ">
+            </div>
+            <div class="form-element my-4" style=" text-align: left; font-weight: bold;">
+                <input type="file" name="image" class="form-control" >
+            <?php if (isset($image)) : ?>
+                <p>Current Image: <?php echo $image; ?></p>
+                <input type="hidden" name="image" value="<?php echo $image; ?>">
+            <?php endif; ?>
+            </div>
+                <div class="d-flex align-items-start">
+                <img src="../../uploads/<?php echo $image ?>" width="100" height="100" >
             </div>
             <input type="hidden" name="id" value="<?php echo $row["id"];?>">
             <div class="form-element">

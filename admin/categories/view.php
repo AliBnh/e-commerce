@@ -45,6 +45,7 @@ require_once '../templates/sidebar.php';
                     if(mysqli_num_rows($result) > 0){
                         while($row = mysqli_fetch_assoc($result)){
                             echo "<h3>".$row['name']."</h3>";
+                            echo "<img src='../../uploads/".$row['image']."' width='100' height='100'>";
                             echo "<p><strong>Description: </strong>".$row['description']."</p>";
                         }
                     }else{

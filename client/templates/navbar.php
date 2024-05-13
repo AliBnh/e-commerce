@@ -1,57 +1,64 @@
 <?php
-session_start();
-
-echo "
-<head>
-<link rel='stylesheet' href='styles.css'>
-</head>
-<style>
-//make items centered vertically
-
-
-</style>
-<nav class='navbar navbar-expand-sm navbar-light bg-light '>
-    <div class='container-fluid mx-5 all'>
-        <a class='navbar-brand' href='index.php'>BrandHub</a>
-        <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
-            <span class='navbar-toggler-icon'></span>
-        </button>
-        <div class='collapse navbar-collapse justify-content-between  align-items-center' id='navbarNav'>
-            <ul class='navbar-nav ' id='navul'>
-                <li class='nav-item'>
-                    <a class='nav-link active' aria-current='page' href='index.php'>Home</a>
-                </li>";
-if(isset($_SESSION['user'])){
-    echo "<li class='nav-item'>
-                    <a class='nav-link' href='profile.php'>Profile</a>
-                </li>
-                <li class='nav-item'>
-                    <a class='nav-link' href='orders.php'>Orders</a>
-                </li>
-                <li class='nav-item'>
-                    <a class='nav-link' href='auth/logout.php'>Logout</a>
-                </li>";
-}
-else{
-   echo "<li class='nav-item'>
-                    <a class='nav-link' href='auth/login.php'>Login</a>
-                </li>
-                <li class='nav-item'>
-                    <a class='nav-link' href='auth/registration.php'>Register</a>
-                </li>";
-}
-echo"           <li class='nav-item'>
-                    <a class='nav-link' href='cart.php'>Cart</a>
-                </li>
-            </ul>
-            <div class='search'>
-            <form class='d-flex ' action='products.php' method='get'>
-                <input class='form-control me-2' type='search' placeholder='Search' aria-label='Search' name='name'>
-                <button class='btn btn-outline-success' type='submit'>Search</button>
-            </form>
-            </div>
-        </div>
-    </nav>";
-require_once "../includes/db_connect.php";
-
+    session_start();
+    if(isset($_SESSION['user'])){
+        $logged = true;
+    }else{
+        $logged = false;
+    }
+    require_once ".././includes/db_connect.php";
+    $sql = "SELECT * FROM categories WHERE archived=0";
+    $result = mysqli_query($conn,$sql);
+    while($category = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+        $categories[] = $category;
+    }
+    
 ?>
+<head>
+<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+H2Xk4z3+OzK72RG8saOTqz0VewLDWuvfIspiRN1bq6Yg8Xn2OJqgxw1xH" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand mx-5" href="index.php">BrandHub</a>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.php">Home</a>
+            </li>
+            <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Categories
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <?php
+                        // foreach($categories as $category){
+                        //     echo '<a class="dropdown-item" href="products.php?id='.$category['id'].'">'.$category['name'].'</a>';
+                        // }
+                    ?>
+                </div>
+            </li> -->
+        </ul>
+    </div>
+    <a href="cart.php" class="nav-link mx-1">
+        Cart
+    </a>
+    <?php
+        if($logged){
+            echo '<a href="profile.php" class="nav-link mx-1">Profile</a>';
+            echo '<a href="orders.php" class="nav-link mx-1">Orders</a>';
+            echo '<a href="auth/logout.php" class="btn btn-warning mx-2">Logout</a>';
+        }else{
+            echo '<a href="auth/login.php" class="btn btn-success mx-1">Login</a>';
+            echo '<a href="auth/register.php" class="btn btn-success mx-1">Register</a>';
+        }
+    ?>
+
+<form class="form-inline my-2 mx-5 d-flex" action="products.php" method="get">
+        <input class="form-control mr-sm-2" type="search" placeholder="Product name" aria-label="Search" name="name">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</nav>
+
+      

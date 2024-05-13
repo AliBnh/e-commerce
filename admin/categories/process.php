@@ -5,6 +5,13 @@ require_once '../templates/header.php';
     if(isset($_POST['create'])){
         $name = mysqli_real_escape_string($conn, $_POST['name']);
         $categoryDescription = mysqli_real_escape_string($conn, $_POST['categoryDescription']);
+
+        $fileName = $_FILES['image']['name'];
+        $fileExt  = pathinfo($fileName, PATHINFO_EXTENSION);
+        $allowedTypes = array('jpg', 'jpeg', 'png','svg');
+        $fileTmpName = $_FILES['image']['tmp_name'];
+        $targetFilePath = "../../uploads/".$fileName;
+
         $checkExistence = "SELECT * FROM categories WHERE LOWER(name) = LOWER('$name')";
         $result = mysqli_query($conn, $checkExistence);
         $numRows = mysqli_num_rows($result);
@@ -12,16 +19,23 @@ require_once '../templates/header.php';
             echo "Category exists";
             exit;
         }else{
-        if(strlen($categoryDescription)>0)
-            $sql = "INSERT INTO categories (name, description) VALUES ('$name', '$description')";
-        else
-            $sql = "INSERT INTO categories (name) VALUES ('$name')";
+        if(in_array($fileExt, $allowedTypes)){
+            if(move_uploaded_file($fileTmpName, $targetFilePath)){
+            $sql = "INSERT INTO categories (name, description, image) VALUES ('$name', '$categoryDescription','$filename')";
         if(mysqli_query($conn, $sql)){
             session_start();
             $_SESSION['create'] = "The category has been added successfully!";
             header("Location: index.php");
         }else{
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+        }else{
+            echo "Error uploading file";
+            exit;
+        }
+        }else{
+            echo "File type not allowed";
+            exit;
         }
     }
     }
@@ -30,10 +44,19 @@ require_once '../templates/header.php';
         $name = mysqli_real_escape_string($conn, $_POST['name']);
         $categoryDescription = mysqli_real_escape_string($conn, $_POST['categoryDescription']);
 
+        $image = $_FILES['image']['name'];
+        $fileExt = pathinfo($image, PATHINFO_EXTENSION);
+        $allowedTypes = array('jpg', 'jpeg', 'png','svg');
+        $fileTmpName = $_FILES['image']['tmp_name'];
+        $targetFilePath = "../../uploads/" . $image;
+      
+        if (!empty($_FILES['image']['name'])) {
+            if (in_array($fileExt, $allowedTypes)) {
+              if (move_uploaded_file($fileTmpName, $targetFilePath)) {
             if(strlen($categoryDescription)>0)
-            $sql = "UPDATE categories SET name='$name', description='$categoryDescription' WHERE id=$id";
+            $sql = "UPDATE categories SET name='$name', description='$categoryDescription', image='$image' WHERE id=$id";
             else
-            $sql = "UPDATE categories SET name='$name' WHERE id=$id";
+            $sql = "UPDATE categories SET name='$name',image='$image' WHERE id=$id";
 
         if(mysqli_query($conn, $sql)){
             session_start();
@@ -42,8 +65,24 @@ require_once '../templates/header.php';
         }else{
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
+        echo "Error uploading file";
+        exit;
+      }
+    }else {
+        $sql = "SELECT image FROM categories WHERE id=$id";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        $existingImagePath = $row['image'];
     
+        $sql = "UPDATE categories SET name='$name', description='$categoryDescription', image='$existingImagePath' WHERE id=$id";
+        if (mysqli_query($conn, $sql)) {
+          session_start();
+          $_SESSION['update'] = "The category has been updated successfully!";
+          header("Location: index.php");
+        } else {
+          echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+    }}
+
     }
-
-
 ?>
