@@ -1,5 +1,5 @@
 <?php
-require_once "header.php";
+require_once "./templates/navbar.php";
 if(!isset($_SESSION['user'])){
     header("Location: ./auth/login.php");
 }

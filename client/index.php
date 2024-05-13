@@ -1,5 +1,5 @@
 <?php
-require_once "header.php";
+require_once "./templates/navbar.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,16 +28,6 @@ require_once "header.php";
                     echo "</div>";
                 }
             ?>
-            <form action="products.php" method="get">
-                <div class="row">
-                    <div class="col-md-3">
-                        <input type="text" name="name" class="form-control" placeholder="Search by name">
-                    </div>
-                    <div class="col-md-3">
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </div>
-                </div>
-            </form>
 
         </div>
     </div>

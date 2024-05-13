@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+<div class="content">
         <?php
             if(isset($_POST['submit'])){
                 $username = $_POST['username'];
@@ -53,39 +53,26 @@
                     }else{
                         echo "Registration failed";
                     }
-                    // require_once "database.php";
-                    // $sql = "INSERT INTO users (username, email, password) VALUES (?,?,?)";
-                    // $stmt = mysqli_stmt_init($conn);
-                    // $prepareStmt = mysqli_stmt_prepare($stmt,$sql);
-                    // if($prepareStmt){
-                    //     mysqli_stmt_bind_param($stmt,"sss",$username,$email,$passwordHash);
-                    //     mysqli_stmt_execute($stmt);
-                    //     echo"<div class='alert alert-success'>Registered successfully</div>";
-                    // }else{
-                    //     echo"<div class='alert alert-success'>Registration failed</div>";
-                    // }
                 }
             }
         ?>
+        <h2>Sign up</h2>
         <form action="registration.php" method="post">
-            <div class="form-group">
+            <div class="input-box">
                 <input type="text" name="username" class="form-control" placeholder="username" >
             </div>
-            <div class="form-group">
+            <div class="input-box">
                 <input type="email" name="email" class="form-control" placeholder="email" >
             </div>
-            <div class="form-group">
+            <div class="input-box">
                 <input type="password" name="password" placeholder="password" class="form-control" >
             </div>
-            <div class="form-group">
+            <div class="input-box">
                 <input type="password" name="repeat_password" class="form-control" placeholder="Repeat password" >
             </div>
-            <div class="form-btn">
-                <input type="submit" value="register" name="submit" class="btn btn-primary">
-            </div>
-            
+            <button type="submit" value="register" name="submit" class="btnn">Sign up</button>
         </form>
-        <div class="">
+        <div class="button">
                 <p>Already registered <a href="login.php">Login here</a></p>
             </div>
     </div>

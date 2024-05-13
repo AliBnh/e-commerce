@@ -1,5 +1,5 @@
 <?php
-require_once "header.php";
+require_once "./templates/navbar.php";
 
 if(isset($_POST['updateQuantity'])){
     $id = mysqli_real_escape_string($conn, $_POST['item_id']);

@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="content">
         <?php
         
             if(isset($_POST["login"])){
@@ -44,15 +44,23 @@
                 }
             }
         ?>
+        <h2>Login</h2>
         <form action="login.php" method="post">
-            <div class="form-group">
+            <div class="input-box">
                 <input type="email" placeholder="Email " name="email" class="form-control">
             </div>
-            <div class="form-group">
+            <div class="input-box">
                 <input type="password" placeholder="Password " name="password" class="form-control">
             </div>
-            <div class="form-btn">
-                <input type="submit" value="Login" name="login" class="btn btn-primary">
+            <div class="remember">
+                <label><input type="checkbox"> Remember me</label>
+                <a href="#">Forget Password</a>
+            </div>
+            <button type="submit" value="Login" name="login" class="btnn">Login</button>
+            <div class="button">
+                <a href="registration.php">
+                 Register Now     
+                </a>
             </div>
         </form>
     </div>
