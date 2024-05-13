@@ -15,6 +15,10 @@ require_once '../templates/sidebar.php';
     .icon{
         width: 16px;
     }
+    .table{
+        text-align: center;
+        vertical-align: middle;     
+    }
 </style>
 <body>
 <div class="container">
