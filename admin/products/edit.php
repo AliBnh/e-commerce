@@ -12,10 +12,17 @@ require_once '../templates/sidebar.php';
 
 </head>
 <body>
+<style>
+    body{
+        background-color: #f8f9fa;
+    }
+    .container{
+        background-color: white;    
+    }
+</style>
 <div class="container" 
     style="
     width: 90%;
-    border: 1px solid #ccc ;
     border-radius: 10px;
     padding: 30px;
     margin: 20px auto;

@@ -14,21 +14,25 @@ require_once '../templates/sidebar.php';
 
 </head>
 <style>
+    body{
+        background-color: #f8f9fa;
+    }
     .icon{
         width: 16px;
     }
     .table{
         text-align: center;
-        vertical-align: middle;     
+        vertical-align: middle; 
+        background-color: white;
     }
 </style>
 <body>
 <div class="container">
-        <header class="d-flex justify-content-between my-4">
+<header class="d-flex justify-content-between ">
             <h1 class="text-center my-4">Orders List</h1>
             <div>
                 //Not developed yet, Create & Edit order pages
-                <a href="create.php" class="btn btn-primary">Place order</a>
+                <a href="create.php" class="btn btn-primary my-4 mx-2">Place order</a>
             </div>
         </header>
         <?php
@@ -57,7 +61,7 @@ require_once '../templates/sidebar.php';
             </div>
             <button type="submit" class="btn btn-primary">Sort</button>
         </form>
-        <table class="table table-bordered table-striped">
+        <table class="table " style="border-radius: 16px;">
             <thead>
                 <tr>
                     <th>#</th>

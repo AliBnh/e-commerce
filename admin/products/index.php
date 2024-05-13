@@ -22,20 +22,24 @@ if(isset($_POST['sort'])){
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 </head>
 <style>
+    body{
+        background-color: #f8f9fa;
+    }
     .icon{
         width: 16px;
     }
     .table{
         text-align: center;
-        vertical-align: middle;     
+        vertical-align: middle; 
+        background-color: white;
     }
 </style>
 <body>
 <div class="container">
-        <header class="d-flex justify-content-between my-4">
+<header class="d-flex justify-content-between ">
             <h1 class="text-center my-4">Products List</h1>
             <div>
-                <a href="create.php" class="btn btn-primary">Add a new Product</a>
+                <a href="create.php" class="btn btn-primary  my-5 mx-2">Add a new Product</a>
             </div>
         </header>
         <?php
@@ -76,7 +80,7 @@ if(isset($_POST['sort'])){
             </div>
         </form>
         <br>
-        <table class="table table-bordered table-striped">
+        <table class="table " style="border-radius: 16px;">
             <thead>
                 <tr>
                     <th>Product</th>

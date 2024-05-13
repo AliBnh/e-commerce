@@ -31,9 +31,11 @@ body {
 	text-decoration: none;
 	text-transform: uppercase;
 	font-size: 16px;
+	font-weight: 200;
 	color: #fff;
 	position: relative;
-	padding: 20px 0 20px 30px;
+	padding: 10px 0 10px 30px;
+	border-bottom: 1px solid #393939;
   }
   nav ul li a:before {
 	content: '';
@@ -99,6 +101,8 @@ body {
   .logout:active {
 	background-color: #262626;
   }
+
+
   
 </style>  
 	<nav>
@@ -111,20 +115,25 @@ body {
 				<a href='../products/index.php'><i class='fa fa-home'></i>   home</a>
 			</li>
 			<li>
-				<a href='../products/index.php'><i class='fa fa-book'></i>   Products</a>
+				<a href='../products/index.php'><i class='fa fa-product-hunt'></i>   Products</a>
 			</li>
 			<li>
-				<a href='../categories/index.php'><i class='fa fa-users'></i>   Brands</a>
+				<a href='../categories/index.php'><i class='fa fa-list'></i>   Brands</a>
 			</li>
 			<li>
 				<a href='../customers/index.php'><i class='fa fa-users'></i>   Customers</a>
 			</li>
 			<li>
-				<a href='../orders/index.php'><i class='fa fa-picture-o'></i>   Orders</a>
+				<a href='../orders/index.php'><i class='fa fa-shopping-cart'></i>   Orders</a>
 			</li>
 			<li>
 				<a href='../orders/index.php'><i class='fa fa-phone'></i>   Order Items</a>
 			</li>
+			<li>
+				<a href='../customers/profile.php'> <i class='fa fa-cog '></i>   Settings</a>
+  			</li>			
+
+  	
 		</ul>
 		<a href='../logout.php' class='logout '>Logout</a>
 

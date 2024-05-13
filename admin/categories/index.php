@@ -12,6 +12,7 @@ require_once '../templates/sidebar.php';
     <style>
         body{
             margin-top: -90px;
+            background-color: #f8f9fa;
         }
         .icon {
             width: 16px;
@@ -24,19 +25,21 @@ require_once '../templates/sidebar.php';
             width: 30%;
             text-align: center;
         }
-        .table{
+    .table{
         text-align: center;
-        vertical-align: middle;     
-    }   
+        vertical-align: middle; 
+        background-color: white;
+    }
     </style>
 </head>
 <body>
 
+
 <div class="container">
-    <header class="d-flex justify-content-between my-4">
-        <h1 class="text-center my-4">Brands List</h1>
+    <header class="d-flex justify-content-evenly mx-4">
+        <h1 class="text-center ">Brands List</h1>
         <div>
-            <a href="create.php" class="btn btn-primary">Add a new Brand</a>
+            <a href="create.php" class="btn btn-primary my-4 mx-2">Add a new Brand</a>
         </div>
     </header>
     <?php
@@ -56,7 +59,7 @@ require_once '../templates/sidebar.php';
         }
     ?>
     <div class="table-container">
-        <table class="table table-bordered table-striped">
+    <table class="table " style="border-radius: 16px;">
             <thead>
                 <tr>
                     <th>Brand</th>
