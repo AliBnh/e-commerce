@@ -23,15 +23,22 @@ require_once '../templates/sidebar.php';
         vertical-align: middle; 
         background-color: white;
     }
+    .heading{
+        position: absolute;
+        top: 50px;
+        left: 50%;            
+    }
+
 </style>
 <body>
 <div class="container">
-<header class="d-flex justify-content-between ">
-            <h1 class="text-center ">Customers List</h1>
-            <div>
-                <a href="create.php" class="btn btn-primary  my-4 mx-2">Add a new user</a>
-            </div>
-        </header>
+<header class="">
+    <h1 class="text-center heading">Customers List</h1>
+    <div class="d-flex justify-content-end">
+        <a href="create.php" class="btn btn-primary  my-3">Add a new user</a>
+    </div>
+</header>
+
         <?php
             if(!$_SESSION)
             session_start();

@@ -36,9 +36,9 @@ require_once '../templates/sidebar.php';
 
 <div class="container">
     <header class="d-flex justify-content-evenly mx-4">
-        <h1 class="text-center ">Brands List</h1>
+        <h1 class="text-center">Brands List</h1>
         <div>
-            <a href="create.php" class="btn btn-primary my-4 mx-2">Add a new Brand</a>
+            <a href="create.php" class="btn btn-primary my-5 mx-2">Add a new Brand</a>
         </div>
     </header>
     <?php

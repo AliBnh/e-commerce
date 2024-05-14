@@ -107,7 +107,7 @@ if(isset($_POST['sort'])){
             if(isset($_GET['searchTerm'])) {
                 $searchTerm = $_GET['searchTerm'];
                 require_once "../../includes/db_connect.php";
-                $sql = "SELECT * FROM products WHERE archived = 0 AND name LIKE '%$searchTerm%'";
+                $sql = "SELECT * FROM products WHERE archived = 0 AND name LIKE '%$searchTerm%' OR price LIKE '%$searchTerm%' OR cost_price LIKE '%$searchTerm%' OR ram LIKE '%$searchTerm%' OR storage LIKE '%$searchTerm%' OR category_id LIKE '%$searchTerm%'";
                 $result = mysqli_query($conn, $sql);
                 if(mysqli_num_rows($result) > 0){
                     while($row = mysqli_fetch_assoc($result)){
