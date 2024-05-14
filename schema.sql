@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 14, 2024 at 12:01 AM
+-- Generation Time: May 14, 2024 at 07:03 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -71,7 +71,10 @@ INSERT INTO `orders` (`id`, `user_id`, `payment_method`, `status`, `created_at`,
 (21, 5, 'cash_on_delivery', 'pending', '2024-05-13 20:45:18', 3899.96),
 (22, 5, 'cash_on_delivery', 'processing', '2024-05-13 20:46:12', 3899.96),
 (23, 5, 'credit_card', 'cancelled', '2024-05-13 20:51:41', 1499.97),
-(24, 5, 'cash_on_delivery', 'pending', '2024-05-13 20:52:54', 2899.97);
+(24, 5, 'cash_on_delivery', 'pending', '2024-05-13 20:52:54', 2899.97),
+(26, 5, 'cash_on_delivery', 'pending', '2024-05-14 17:08:30', 2799.96),
+(27, 5, 'credit_card', 'pending', '2024-05-14 17:08:47', 1399.98),
+(28, 5, 'cash_on_delivery', 'pending', '2024-05-14 18:02:56', 7799.91);
 
 -- --------------------------------------------------------
 
@@ -108,7 +111,15 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `total`) 
 (36, 23, 34, 2, 799.98),
 (37, 23, 35, 1, 699.99),
 (38, 24, 40, 2, 2399.98),
-(39, 24, 41, 1, 499.99);
+(39, 24, 41, 1, 499.99),
+(42, 26, 37, 2, 799.98),
+(43, 26, 33, 2, 1999.98),
+(44, 27, 34, 1, 399.99),
+(45, 27, 33, 1, 999.99),
+(46, 28, 37, 5, 1999.95),
+(47, 28, 36, 1, 1199.99),
+(48, 28, 38, 2, 3599.98),
+(49, 28, 39, 1, 999.99);
 
 -- --------------------------------------------------------
 
@@ -229,13 +240,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `products`

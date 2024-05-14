@@ -51,7 +51,7 @@ if(isset($_POST['removeProduct'])){
         text-align: center;
         vertical-align: middle; 
         background-color: white;
-        margin-top: 80px;
+        margin-top: 50px;
     }
     h1{
         margin-left: 60px;
@@ -60,12 +60,21 @@ if(isset($_POST['removeProduct'])){
     .checkbtn{
         margin-left: 45%;
         width: 150px;
-        margin-top: 30px;
+        margin-top: 20px;
         margin-bottom: 50px;
     }
     .container{
         width: 60%;
         margin: 0 auto;
+    }
+    .iconi{
+        width: 30px;
+        height:35px;
+    }
+    .textInput{
+        border: 1px solid #ced4da;
+        text-align: center;
+        border-radius: 5px;
     }
     </style>
     <body>
@@ -107,12 +116,13 @@ if(isset($_POST['removeProduct'])){
                             <div class='d-flex justify-content-center'>
                             <form action='' method='post' class='d-flex'>
                               <input type='hidden' name='item_id' value='" . $product['id'] . "'>
-                              <input type='number' name='quantity' value='" . $quantity . "' min='1' style='width: 30px;'>
-                              <button type='submit' name='updateQuantity' class='btn btn-sm btn-primary'>Update</button>
+                              <input type='number' class='textInput mx-1' name='quantity' value='" . $quantity . "' min='1' style='width: 30px;'>
+                              <button type='submit' name='updateQuantity' class='btn btn-sm btn-primary iconi mx-1'><i class='fa fa-refresh ' aria-hidden='true'></i>
+                              </button>
                             </form>
                             <form action='' method='post'>
                               <input type='hidden' name='item_id' value='" . $product['id'] . "'>
-                              <button type='submit' name='removeProduct' class='btn btn-sm btn-danger'>Remove</button>
+                              <button type='submit' name='removeProduct' class='btn btn-sm btn-danger iconi mx-1'><i class='fa fa-trash-o ' aria-hidden='true'></i></button>
                             </form>
                             </div>
                           </td>";
@@ -123,8 +133,8 @@ if(isset($_POST['removeProduct'])){
                 ?>
 
                 <tr>
-                    <td colspan="5">Total</td>
-                    <td><?php echo $total; ?></td>
+                    <td colspan="5"><strong>Total</strong></td>
+                    <td><strong><?php echo $total; ?></strong></td>
                 </tr>
                 
             </tbody>
