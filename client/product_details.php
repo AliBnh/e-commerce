@@ -1,5 +1,7 @@
 <?php
 require_once "./templates/navbar.php";
+ob_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,3 +117,8 @@ require_once "./templates/navbar.php";
 
 </body>
 </html>
+
+<?php
+
+ob_end_flush();
+?>

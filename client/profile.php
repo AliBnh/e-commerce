@@ -1,5 +1,7 @@
 <?php
 require_once "./templates/navbar.php";
+ob_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +28,7 @@ require_once "./templates/navbar.php";
         width: 35%;
         
     }
+    
 </style>
 <div class="container">
         <header class="d-flex justify-content-between my-4">
@@ -119,3 +122,7 @@ if(isset($_POST['edit'])){
         }
     }
 }   
+
+ob_start();
+
+?>

@@ -44,9 +44,7 @@ if(isset($_POST['removeProduct'])){
         /* background: url(../uploads/bg2.jpg); */
 
     }
-        .icon{
-        width: 16px;
-    }
+
     .table{
         text-align: center;
         vertical-align: middle; 
@@ -75,6 +73,19 @@ if(isset($_POST['removeProduct'])){
         border: 1px solid #ced4da;
         text-align: center;
         border-radius: 5px;
+    }
+    #idCategoryNav{
+        width:100%;
+        border: 0px solid gainsboro;
+        margin-top: 9px;
+        background-color: transparent;
+        margin-left: 10px;
+    }
+    .icon{
+        font-size: 1.5rem;
+    }
+    .icon:hover{
+        color: grey;
     }
     </style>
     <body>

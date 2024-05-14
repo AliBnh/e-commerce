@@ -86,7 +86,7 @@
         }else{
             echo '<div class=" mx-5">';
             echo '<a href="auth/login.php" class="btn btn-success mx-1">Login</a>';
-            echo '<a href="auth/register.php" class="btn btn-success mx-1">Register</a>';
+            echo '<a href="auth/registration.php" class="btn btn-success mx-1">Register</a>';
             echo '</div>';
         }
     ?>

@@ -24,7 +24,9 @@ require_once '../templates/sidebar.php';
         background-color: white;
     }
     .heading{
-        margin: 30px;
+        position: absolute;
+        top: 50px;
+        left: 50%;            
     }
     .selectBox{
         width: 100px;
@@ -35,7 +37,7 @@ require_once '../templates/sidebar.php';
 <body>
 <div class="container">
         <header class="d-flex heading">
-            <h1 class="text-center my-4">Orders List</h1>
+            <h1 class="text-center ">Orders List</h1>
         </header>
         <?php
             if(!$_SESSION)
@@ -53,7 +55,7 @@ require_once '../templates/sidebar.php';
                 unset($_SESSION['update']);
             }
         ?>
-        <div class="d-flex mb-5 justify-content-around">
+        <div class="d-flex mb-4 justify-content-around">
             <form action="" method="get">
                  <div class="d-flex ">
                     <input type="number" name="searchId" class="form-control" style="width: 220px;border-top-right-radius: 0px; border-bottom-right-radius:0px; " placeholder="Order ID">
