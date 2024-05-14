@@ -140,4 +140,4 @@ Stripe link : https://dashboard.stripe.com/test/payments
 - `order_items.product_id` references `products.id` (a product can be in many orders)
 - `products.category_id` references `categories.id` (a category can have many products)
 
-![image](https://github.com/AliBnh/e-commerce/assets/107149305/517fca79-a4c2-4231-86b1-8354926c67e6)
+![image](https://github.com/AliBnh/e-commerce/assets/107149305/da3cd12e-752b-4300-a422-e16bf2f5ff69)
