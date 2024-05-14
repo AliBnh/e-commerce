@@ -85,50 +85,53 @@ Stripe link : https://dashboard.stripe.com/test/payments
 
 ### categories
 
-- `id` (int): Unique identifier for the category (primary key)
-- `name` (varchar(255)): Name of the category
-- `description` (text): Optional description of the category
-- `archived` (tinyint(1)): Flag indicating if the category is archived (0: active, 1: archived)
+- id: Unique identifier for each category (Auto-incremented).
+- name: Name of the category.
+- description: Description of the category.
+- image: Path to the image associated with the category.
+- archived: Flag indicating if the category is archived or not.
 
-### orders
+### Orders
 
-- `id` (int): Unique identifier for the order (primary key)
-- `user_id` (int): Foreign key referencing the user who placed the order (links to users.id)
-- `payment_method` (enum): Payment method used for the order (credit_card, cash_on_delivery)
-- `status` (enum): Current status of the order (pending, processing, shipped, completed, cancelled)
-- `created_at` (datetime): Date and time the order was created
-- `total` (decimal(10,2)): Total amount paid for the order
+- id: Unique identifier for each order (Auto-incremented).
+- user_id: Identifier for the user who placed the order.
+- payment_method: Payment method used for the order (credit card or cash on delivery).
+- status: Current status of the order (pending, processing, shipped, cancelled).
+- created_at: Timestamp indicating when the order was created.
+- total: Total amount of the order.
 
-### order_items
+### Order Items
 
-- `id` (int): Unique identifier for the order item (primary key)
-- `order_id` (int): Foreign key referencing the order the item belongs to (links to orders.id)
-- `product_id` (int): Foreign key referencing the product in the order (links to products.id)
-- `quantity` (int): Quantity of the product ordered
-- `total` (decimal(10,2)): Total price for the specific quantity of the product ordered
+- id: Unique identifier for each order item (Auto-incremented).
+- order_id: Identifier for the order the item belongs to.
+- product_id: Identifier for the product associated with the order item.
+- quantity: Quantity of the product ordered.
+- total: Total cost for the specific quantity of the product.
 
-### products
+### Products
 
-- `id` (int): Unique identifier for the product (primary key)
-- `name` (varchar(255)): Name of the product
-- `description` (text): Optional description of the product
-- `price` (decimal(10,2)): Selling price of the product
-- `purchase_price` (int): Price at which the product was purchased
-- `stock` (int): Current stock level of the product
-- `image` (varchar(255)): Path to the product image (optional)
-- `category_id` (int): Foreign key referencing the category the product belongs to (links to categories.id)
-- `archived` (tinyint(1)): Flag indicating if the product is archived (0: active, 1: archived)
+- id: Unique identifier for each product (Auto-incremented).
+- name: Name of the product.
+- description: Description of the product.
+- ram: Amount of RAM memory the product has.
+- storage: Storage capacity of the product.
+- price: Selling price of the product.
+- cost_price: Cost price of the product.
+- color: Color of the product.
+- image: Path to the image associated with the product.
+- category_id: Identifier for the category the product belongs to.
+- archived: Flag indicating if the product is archived or not.
 
-### users
+### Users
 
-- `id` (int): Unique identifier for the user (primary key)
-- `username` (varchar(255)): Username for login
-- `email` (varchar(255)): User's email address
-- `address` (varchar(100)): User's address (optional)
-- `phone_number` (varchar(20)): User's phone number (optional)
-- `password` (varchar(255)): Hashed password for secure login
-- `is_admin` (tinyint(1)): Flag indicating if the user is an administrator (0: regular user, 1: administrator)
-- `archived` (tinyint(1)): Flag indicating if the user is archived (0: active, 1: archived)
+- id: Unique identifier for each user (Auto-incremented).
+- username: Username of the user.
+- email: Email address of the user.
+- address: Address of the user.
+- phone_number: Phone number of the user.
+- password: Encrypted password of the user.
+- is_admin: Flag indicating if the user is an administrator or not.
+- archived: Flag indicating if the user is archived or not.
 
 ## Relationships
 
