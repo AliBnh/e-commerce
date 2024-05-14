@@ -22,6 +22,8 @@ $rams = array_unique($rams);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <style>
     .box{
@@ -33,7 +35,21 @@ $rams = array_unique($rams);
     .rowing{
         text-align: center;
     }
+    body{
+        background: #f5f5f5;
+        /* background: url(../uploads/gradient.jpg); */
 
+    }
+    .addCartBtn{
+        background-color: #28a745;
+        border: 1px solid #28a745;
+    
+    }
+    .viewBtn{
+        background-color: #007bff;
+        border: 1px solid #007bff;
+    
+    }
 </style>
 <body>
 
@@ -114,16 +130,16 @@ $rams = array_unique($rams);
                         echo "<h5 class='card-title'>".$row['name']."</h5>";
                         echo "<p class='card-text'>".$row['price']."</p>";
                         echo "<div class='d-flex  justify-content-evenly '>";
-                        echo "<a href='product_details.php?id=".$row['id']."' class='btn btn-primary ' style='width:110px; height:41px;'>View</a>";
-                        //add to cart in cookies(update or add)
+                        echo "<a href='product_details.php?id=".$row['id']."' class='btn btn-primary viewBtn' style='width:110px; height:41px;'>View</a>";
+
                         echo "<form action='' method='post'>";
                         echo "<input type='hidden' name='id' value='".$row['id']."'>";
                         echo "<input type='hidden' name='name' value='".$row['name']."'>";
                         echo "<input type='hidden' name='price' value='".$row['price']."'>";
                         echo "<input type='hidden' name='image' value='".$row['image']."'>";
                         echo "<input type='hidden' name='quantity' value='1'>";
-                        echo "<button type='submit' name='add' class='btn btn-success ' style='width:110px; height:41px;'>Add to Cart</button>";
-                        
+                        echo "<button type='submit' name='add' class='btn btn-success addCartBtn' style='width:110px; height:41px;'>Add to Crt</button>";
+                        // <i class='fa fa-cart-plus' aria-hidden='true'></i> 
                         echo "</form>";
                         echo"</div>";
                         echo "</div>";
@@ -198,14 +214,14 @@ $rams = array_unique($rams);
                         echo "<h5 class='card-title'>".$row['name']."</h5>";
                         echo "<p class='card-text'>".$row['price']."</p>";
                         echo "<div class='d-flex  justify-content-evenly '>";
-                        echo "<a href='product_details.php?id=".$row['id']."' class='btn btn-primary ' style='width:110px; height:41px;'>View</a>";
+                        echo "<a href='product_details.php?id=".$row['id']."' class='btn btn-primary addCartBtn ' style='width:110px; height:41px;'>View</a>";
                         echo "<form action='' method='post'>";
                         echo "<input type='hidden' name='id' value='".$row['id']."'>";
                         echo "<input type='hidden' name='name' value='".$row['name']."'>";
                         echo "<input type='hidden' name='price' value='".$row['price']."'>";
                         echo "<input type='hidden' name='image' value='".$row['image']."'>";
                         echo "<input type='hidden' name='quantity' value='1'>";
-                        echo "<button type='submit' name='add' class='btn btn-success ' style='width:110px; height:41px;'>Add to Cart</button>";
+                        echo "<button type='submit' name='add' class='btn btn-success viewBtn' style='width:110px; height:41px;'>Add to Cart</button>";
                         echo "</form>";
                         echo "</div>";
                         echo "</div>";
@@ -235,14 +251,14 @@ $rams = array_unique($rams);
                         echo "<h5 class='card-title'>".$row['name']."</h5>";
                         echo "<p class='card-text'>".$row['price']."</p>";
                         echo "<div class='d-flex  justify-content-evenly '>";
-                        echo "<a href='product_details.php?id=".$row['id']."' class='btn btn-primary ' style='width:110px; height:41px;'>View</a>";
+                        echo "<a href='product_details.php?id=".$row['id']."' class='btn btn-primary addCartBtn' style='width:110px; height:41px;'>View</a>";
                         echo "<form action='' method='post'>";
                         echo "<input type='hidden' name='id' value='".$row['id']."'>";
                         echo "<input type='hidden' name='name' value='".$row['name']."'>";
                         echo "<input type='hidden' name='price' value='".$row['price']."'>";
                         echo "<input type='hidden' name='image' value='".$row['image']."'>";
                         echo "<input type='hidden' name='quantity' value='1'>";
-                        echo "<button type='submit' name='add' class='btn btn-success ' style='width:110px; height:41px;'>Add to Cart</button>";
+                        echo "<button type='submit' name='add' class='btn btn-success viewBtn' style='width:110px; height:41px;'>Add to Cart</button>";
                         echo "</form>";
                         echo "</div>";
                         echo "</div>";

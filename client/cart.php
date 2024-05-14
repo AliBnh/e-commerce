@@ -41,6 +41,8 @@ if(isset($_POST['removeProduct'])){
 <style>
         body{
         background-color: #f8f9fa;
+        /* background: url(../uploads/bg2.jpg); */
+
     }
         .icon{
         width: 16px;
@@ -59,6 +61,7 @@ if(isset($_POST['removeProduct'])){
         margin-left: 45%;
         width: 150px;
         margin-top: 30px;
+        margin-bottom: 50px;
     }
     .container{
         width: 60%;

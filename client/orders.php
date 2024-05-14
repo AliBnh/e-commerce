@@ -15,6 +15,8 @@ if(!isset($_SESSION['user'])){
 <style>
         body{
         background-color: #f8f9fa;
+        /* background: url(../uploads/gradient.jpg); */
+
     }
         .icon{
         width: 16px;

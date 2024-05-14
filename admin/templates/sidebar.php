@@ -31,7 +31,7 @@ body {
 	text-decoration: none;
 	text-transform: uppercase;
 	font-size: 16px;
-	font-weight: 200;
+	font-weight: 500;
 	color: #fff;
 	position: relative;
 	padding: 10px 0 10px 30px;
@@ -75,13 +75,19 @@ body {
 	width: 90%;
   }
   .logo {
-	width: 150px;
-	height: 150px;
+	height: 120px;
 	overflow: hidden;
-	margin: 25px auto;
+	margin-top: 20px;
+	margin-left:-30px;
+	margin-bottom: 40px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+
   }
   .logo img {
-	width: 50%;
+	width: 20%;
   }
   .logout {
 	position: fixed;
@@ -110,7 +116,7 @@ body {
 		<ul>
 			<li class='logo'>
 				<img src='../../uploads/download.svg'>
-				<h2 style='color:white;'>BrandHub</h2>
+				<h4 style='color:white;'>BrandHub</h4>
 			</li>
 			<li>
 				<a href='../products/index.php'><i class='fa fa-home'></i>   home</a>

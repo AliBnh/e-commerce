@@ -15,6 +15,8 @@ require_once "./templates/navbar.php";
 <style>
     body{
         background-color: #f8f9fa;
+        /* background: url(../uploads/gradient.jpg); */
+
     }
     .container{
         background-color: white;  
