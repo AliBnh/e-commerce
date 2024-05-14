@@ -1,6 +1,7 @@
 <?php
     require_once '../templates/header.php';
     require_once '../templates/sidebar.php';
+    ob_start();
 ?>
 
 <!DOCTYPE html>
@@ -103,4 +104,5 @@ if(isset($_POST['edit'])){
                     }
 }                
     }
+    ob_end_flush();
 }   

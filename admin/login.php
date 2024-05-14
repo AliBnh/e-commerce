@@ -42,6 +42,7 @@
                 echo "<div class='alert alert-danger'>Email doesn t match </div>";
             }
         }
+        
         ?>
         <form action="" method="post">
             <h2>Login</h2>
