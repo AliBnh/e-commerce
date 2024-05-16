@@ -1,5 +1,4 @@
 # E-commerce App Requirements
-Stripe link : https://dashboard.stripe.com/test/payments
 ## 1. Functionalities
 
 ### Admin & Client
@@ -14,6 +13,7 @@ Stripe link : https://dashboard.stripe.com/test/payments
   - Filter products by price or other criteria.
   - Sort products by ascending or descending order of price or other criteria.
   - Track orders.
+  - Track payments on Stripe.
 - **Administrator:**
   - Create, modify, and delete products/categories.
   - Manage orders.
@@ -55,7 +55,7 @@ Stripe link : https://dashboard.stripe.com/test/payments
 ### Checkout Page
 
 - Provides a form for entering checkout data and placing orders.
-- Offers the choice of payment methods, either bank card or cash on delivery.
+- Offers the choice of payment methods, either bank card (Stripe integration) or cash on delivery.
 
 ### Order Tracking Page
 
