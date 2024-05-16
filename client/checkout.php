@@ -130,7 +130,7 @@ if(isset($_POST['checkout'])){
     setcookie('cart', '', time() - 3600);
     if($_POST['payment_method'] == 'credit_card'){
         require "../vendor/autoload.php";
-        $stripe_secret_key = "sk_test_51OhG8vCDQGH9qTAvml4xFFTcLfwDqt5IKjqLHKArtniKB37iRpjfJCk8K9KPltHJegFKitfWqhCUnhYZDQ6WIrZk00nNaJLfRo";
+        $stripe_secret_key = "YOUR_STRIPE_SECRET_KEY";
         \Stripe\Stripe::setApiKey($stripe_secret_key);
         $checkout_session = \Stripe\Checkout\Session::create([
             "mode" => "payment",
