@@ -100,8 +100,8 @@ if(isset($_POST['removeProduct'])){
                     <th>Product</th>
                     <th>Price</th>
                     <th>Quantity</th>
-                    <th>Actions</th>
                     <th>Total</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -120,9 +120,9 @@ if(isset($_POST['removeProduct'])){
                             echo "<tr>";
                             echo "<td><img src='../uploads/".$product['image']."' width='100' height='100'></td>";
                             echo "<td>".$product['name']."</td>";
-                            echo "<td>".$product['price']."</td>";
+                            echo "<td>$".$product['price']."</td>";
                             echo "<td>".$quantity."</td>";
-                            echo "<td>".$product['price'] * $quantity."</td>";
+                            echo "<td>$".$product['price'] * $quantity."</td>";
                             echo "<td>
                             <div class='d-flex justify-content-center'>
                             <form action='' method='post' class='d-flex'>
@@ -145,7 +145,7 @@ if(isset($_POST['removeProduct'])){
 
                 <tr>
                     <td colspan="5"><strong>Total</strong></td>
-                    <td><strong><?php echo $total; ?></strong></td>
+                    <td><strong>$<?php echo $total; ?></strong></td>
                 </tr>
                 
             </tbody>

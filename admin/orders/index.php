@@ -37,7 +37,6 @@ require_once '../templates/sidebar.php';
 <body>
 <div class="container">
         <header class="d-flex heading">
-            <h1 class="text-center ">Orders List</h1>
         </header>
         <?php
             if(!$_SESSION)
